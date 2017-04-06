@@ -38,11 +38,6 @@ function login()
 	}
 }
 
-function index()
-{
-	render("login/index");
-}
-
 function register()
 {
 	render("login/register");
