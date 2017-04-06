@@ -94,7 +94,4 @@ function deleteUser($id)
 	));
 
 	$db = null;
-
-	return $query->fetch(PDO::FETCH_ASSOC);
-
 }

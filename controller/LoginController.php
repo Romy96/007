@@ -38,11 +38,6 @@ function login()
 	}
 }
 
-function index()
-{
-	render("login/index");
-}
-
 function register()
 {
 	render("login/register");
@@ -87,11 +82,20 @@ function delete($id)
 	}
 }
 
-function deleteAction()
+function deleteAction($id)
 {
+	$user = getUser($id);
+	
 		//Als id bestaan, voer dan functie uit.
 	if (isset($id)) {
 		deleteUser($id);
+	}
+	else
+	{
+		echo 'Id van gebruiker niet gevonden';
+		render("login/delete", array(
+			'user' => $user
+		));
 	}
 
 	//Nadat het uitgevoerd is, ga je terug naar het tabel voor resultaat.
