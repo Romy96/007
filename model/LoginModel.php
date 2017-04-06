@@ -27,6 +27,47 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $userna
 		));
 
 	$db = null;
-	
-	return true;
+}
+
+function getUser($id) 
+{
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT * FROM login WHERE id=:id ";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':id' => $id
+	));
+
+	$db = null;
+
+	return $query->fetch(PDO::FETCH_ASSOC);
+}
+
+function getAllUsers() 
+{
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT * FROM login";
+	$query = $db->prepare($sql);
+	$query->execute();
+
+	$db = null;
+
+	return $query->fetchAll();
+}
+
+function deleteUser($id) 
+{
+	$db = openDatabaseConnection();
+
+	$sql = "DELETE FROM login WHERE id=:id ";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':id' => $id
+	));
+
+	$db = null;
+
+	return $query->fetch(PDO::FETCH_ASSOC);
 }
