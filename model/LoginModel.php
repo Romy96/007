@@ -30,3 +30,27 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $userna
 	
 	return true;
 }
+
+function loginUser($username = null, $password = null)
+{     
+	$username = $_POST["username"]; 
+    $password = $_POST["password"]; 
+    
+    $db = openDatabaseConnection();
+
+    $result1 = $db->prepare("SELECT * FROM login WHERE username = '$username' AND  password = '$password'");
+ 	$result1->execute();
+    if($result1->rowCount() > 0 )
+	{
+		$_SESSION['logged in'] = true;
+		$_SESSION['username'] = $username;
+		$db = null;
+		return true;
+	}
+
+	else
+	{
+		$db = null;
+		return false;
+	}
+}

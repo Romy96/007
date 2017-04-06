@@ -18,7 +18,7 @@
 	</div>
 	<div>
 		<label for="password">Password:</label>
-		<input type="text" name="password">
+		<input type="password" name="password">
 	</div>
 	<div>
 		<label for="email">Email:</label>

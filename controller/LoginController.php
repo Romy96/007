@@ -4,7 +4,24 @@ require(ROOT . "model/LoginModel.php");
 
 function login()
 {
-	render("login/login");
+	if(isset($_POST["username"]) && isset($_POST["password"])) {
+		if(loginUser($_POST['username'], $_POST['password']))
+		{
+			header("Location:" . URL . "login/index");
+		}else{
+				render("login/login");
+			echo 'ownee het is een fout help';
+		}
+	}
+	else
+	{
+		render("login/login");
+	}
+}
+
+function index()
+{
+	render("login/index");
 }
 
 function register()
