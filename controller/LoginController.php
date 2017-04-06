@@ -8,7 +8,6 @@ function index()
 
 	if(empty($user)) 
 	{
-		echo 'Gebruiker niet gevonden';
 		render("login/index");
 		exit();
 	}
