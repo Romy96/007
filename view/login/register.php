@@ -1,5 +1,5 @@
 <h1>Registreer</h1>
-<form action="<?= URL ?>login/createUser" method="post">
+<form action="<?= URL ?>login/registerSave" method="post">
 	<div>
 		<label for="firstname">Firstname:</label>
 		<input type="text" name="firstname">
