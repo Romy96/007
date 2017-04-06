@@ -10,5 +10,6 @@
 	<nav>
 	<ul>
 		<li><a href="<?= URL ?>login/login">Login</a></li>
+		<li><a href="<?= URL ?>login/register">Registreren</a></li>
 	</ul>
 	</nav>
