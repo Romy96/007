@@ -4,13 +4,6 @@ require(ROOT . "model/LoginModel.php");
 
 function index()
 {
-	if ( IsLoggedInSession()==false ) {
-		echo "U heeft nog niet ingelogd!";
-		render("login/login");
-		exit();
-	}
-	else
-	{
 		$user = getAllUsers();
 
 		if(empty($user)) 
@@ -25,7 +18,6 @@ function index()
 				'user' => $user
 			));
 		}
-	}
 }
 
 function login()
