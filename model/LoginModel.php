@@ -1,6 +1,6 @@
 <?php
 
-function createUser($firstname = null, $prefix = null, $lastname = null, $username = null, $password = null, $email = null)
+function createUser($firstname = null, $prefix = null, $lastname = null, $username = null, $password = null, $email = null, $IsAdmin)
 {
 	$firstname = isset($_POST['firstname']) ? $_POST['firstname'] : null;
 	$prefix = isset($_POST['prefix']) ? $_POST['prefix'] : null;
@@ -9,6 +9,7 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $userna
 	$password = isset($_POST['password']) ? $_POST['password'] : null;
 	$hash = md5($password);
 	$email = isset($_POST['email']) ? $_POST['email'] : null;
+	$IsAdmin = (isset($_POST['yes']))?1:0;
 	
 	if (strlen($firstname) == 0 || strlen($lastname) == 0 || strlen($username) == 0 || strlen($password) == 0 || strlen($email) == 0) {
 		return false;
@@ -16,16 +17,31 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $userna
 	
 	$db = openDatabaseConnection();
 
-	$sql = "INSERT INTO login(firstname, prefix, lastname, username, password, email) VALUES (:firstname, :prefix, :lastname, :username, :password, :email)";
-	$query = $db->prepare($sql);
-	$query->execute(array(
-		':firstname' => $firstname,
-		':prefix' => $prefix,
-		':lastname' => $lastname,
-		':username' => $username,
-		':password' => $hash,
-		':email' => $email
-		));
+	if ($IsAdmin==1) {
+		$sql = "INSERT INTO login(firstname, prefix, lastname, username, password, email, is_admin) VALUES (:firstname, :prefix, :lastname, :username, :password, :email, :IsAdmin)";
+		$query = $db->prepare($sql);
+		$query->execute(array(
+			':firstname' => $firstname,
+			':prefix' => $prefix,
+			':lastname' => $lastname,
+			':username' => $username,
+			':password' => $hash,
+			':email' => $email,
+			':IsAdmin' => $IsAdmin
+			));
+	}
+	elseif ($IsAdmin==0) {
+			$sql = "INSERT INTO login(firstname, prefix, lastname, username, password, email) VALUES (:firstname, :prefix, :lastname, :username, :password, :email)";
+		$query = $db->prepare($sql);
+		$query->execute(array(
+			':firstname' => $firstname,
+			':prefix' => $prefix,
+			':lastname' => $lastname,
+			':username' => $username,
+			':password' => $hash,
+			':email' => $email
+			));
+	}
 
 	$db = null;
 	
@@ -40,7 +56,7 @@ function loginUser($username = null, $password = null)
     $db = openDatabaseConnection();
 
     $result1 = $db->prepare("SELECT * FROM login WHERE username = '$username' AND  password = '$password'");
- 	$result1->execute();
+ 	$result1->execute(array());
     if($result1->rowCount() > 0 )
 	{
 		$_SESSION['logged in'] = true;
@@ -54,6 +70,20 @@ function loginUser($username = null, $password = null)
 		$db = null;
 		return false;
 	}
+}
+
+function IsLoggedInSession() {
+	if (isset($_SESSION['logged in'])==false) {
+		return 0;
+	}
+	else
+	{
+		return 1;
+	}
+}
+
+function IsAdmin() {
+	return (!empty($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1);
 }
 
 function getUser($id) 

@@ -4,42 +4,68 @@ require(ROOT . "model/LoginModel.php");
 
 function index()
 {
-	$user = getAllUsers();
-
-	if(empty($user)) 
-	{
-		render("login/index");
+	if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd!";
+		render("login/login");
 		exit();
 	}
-
-	else 
+	else
 	{
-		render("login/index", array(
-			'user' => $user
-		));
+		$user = getAllUsers();
+
+		if(empty($user)) 
+		{
+			render("login/index");
+			exit();
+		}
+
+		else 
+		{
+			render("login/index", array(
+				'user' => $user
+			));
+		}
 	}
 }
 
 function login()
 {
-	if(isset($_POST["username"]) && isset($_POST["password"])) {
-		if(loginUser($_POST['username'], $_POST['password']))
-		{
-			header("Location:" . URL . "login/index");
-		}else{
-				render("login/login");
-			echo 'ownee het is een fout help';
-		}
+	if ( IsLoggedInSession()==true ) {
+		echo "U heeft al ingelogd!";
+		render("login/index");
+		exit();
 	}
-	else
-	{
-		render("login/login");
+	else {
+		if(isset($_POST["username"]) && isset($_POST["password"])) {
+			if(loginUser($_POST['username'], $_POST['password']))
+			{
+				header("Location:" . URL . "login/index");
+				exit();
+			}else{
+				render("login/login");
+				echo 'ownee het is een fout help';
+				exit();
+			}
+		}
+		else
+		{
+			render("login/login");
+			exit();
+		}
 	}
 }
 
 function register()
 {
-	render("login/register");
+	if ( IsLoggedInSession()==true ) {
+		echo "U bent al ingelogd!";
+		render("login/index");
+		exit();
+	}
+	else {
+		render("login/register");
+		exit();
+	}
 }
 
 function registerSave()
@@ -61,23 +87,39 @@ function registerSave()
 
 function delete($id) 
 {
-	$user = getUser($id);
-
-	if(empty($user)) {
-		echo 'Gebruiker niet gevonden';
+	 if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd!";
 		render("login/login");
 		exit();
 	}
 
-	if (isset($id)) {
-		render("login/delete", array(
-			'user' => $user
-		));
-	}
-	else {
-		echo 'Id van gebruiker niet gevonden';
-		render("login/login");
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "U bent wel ingelogd, maar u bent geen beheerder!";
+		render("login/index");
 		exit();
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		$user = getUser($id);
+
+		if(empty($user)) {
+			echo 'Gebruiker niet gevonden';
+			render("login/login");
+			exit();
+		}
+
+		if (isset($id)) {
+			render("login/delete", array(
+				'user' => $user
+			));
+		}
+		else {
+			echo 'Id van gebruiker niet gevonden';
+			render("login/login");
+			exit();
+		}
 	}
 }
 
