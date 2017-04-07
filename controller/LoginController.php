@@ -44,6 +44,7 @@ function register()
 
 function registerSave()
 {
+
 	if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
 		echo 'U heeft een veld niet ingevuld';
 		render("login/register");
@@ -53,10 +54,9 @@ function registerSave()
 	// if fields are filled, call function
 	if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
 		createUser($_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email']);
+		header("Location:" . URL . "login/login");
 		exit();
 	}
-
-	header("Location:" . URL . "login/login");
 }
 
 function delete($id) 
