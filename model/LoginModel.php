@@ -30,3 +30,25 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $userna
 	
 	return true;
 }
+
+function checkEmail($email)
+{
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT * FROM login WHERE email=:email";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':email' => $email
+		));
+
+	$db = null;
+
+	$user = $query->fetchAll();
+
+	return $user;
+}
+
+function sendEmail()
+{
+	
+}
