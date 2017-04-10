@@ -136,8 +136,29 @@ function deleteAction($id)
 			'user' => $user
 		));
 	}
+	header("Location:" . URL . "login/login");
+}
 
-	//Nadat het uitgevoerd is, ga je terug naar het tabel voor resultaat.
-	echo 'Gebruiker verwijderd!';
-	header("Location:" . URL . "login/index");
+function forgot()
+{
+	render("login/forgot");
+}
+
+function sendNewPassword()
+{
+	if (isset($_POST['email'])){
+		$user = checkEmail($_POST['email']);
+		if (!empty($user)) {
+			header("Location:" . URL . "login/sendmail");
+		}
+	}
+
+	echo "Hurray!!!";
+
+	// header incomming!!!!
+}
+
+function sendmail()
+{
+	render("login/sendmail");
 }

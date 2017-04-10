@@ -47,13 +47,9 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $userna
 	return true;
 }
 
-function loginUser($username = null, $password = null)
-{     
-	$username = $_POST["username"]; 
-    $password = $_POST["password"]; 
-    
-    $db = openDatabaseConnection();
 
+function loginUser()
+{
     $result1 = $db->prepare("SELECT * FROM login WHERE username = '$username' AND  password = '$password'");
  	$result1->execute();
     if($result1->rowCount() > 0 )
@@ -86,42 +82,26 @@ function IsAdmin() {
 }
 
 function getUser($id) 
+=======
+function checkEmail($email)
+>>>>>>> ac36991e2a59d6a3468e1f756e96c9d79708a63c
 {
 	$db = openDatabaseConnection();
 
-	$sql = "SELECT * FROM login WHERE id=:id ";
+	$sql = "SELECT * FROM login WHERE email=:email";
 	$query = $db->prepare($sql);
 	$query->execute(array(
-		':id' => $id
-	));
+		':email' => $email
+		));
 
 	$db = null;
 
-	return $query->fetch(PDO::FETCH_ASSOC);
+	$user = $query->fetchAll();
+
+	return $user;
 }
 
-function getAllUsers() 
+function sendEmail()
 {
-	$db = openDatabaseConnection();
-
-	$sql = "SELECT * FROM login";
-	$query = $db->prepare($sql);
-	$query->execute();
-
-	$db = null;
-
-	return $query->fetchAll();
-}
-
-function deleteUser($id) 
-{
-	$db = openDatabaseConnection();
-
-	$sql = "DELETE FROM login WHERE id=:id ";
-	$query = $db->prepare($sql);
-	$query->execute(array(
-		':id' => $id
-	));
-
-	$db = null;
+	
 }
