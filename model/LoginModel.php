@@ -7,7 +7,6 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $userna
 	$lastname = isset($_POST['lastname']) ? $_POST['lastname'] : null;
 	$username = isset($_POST['username']) ? $_POST['username'] : null;
 	$password = isset($_POST['password']) ? $_POST['password'] : null;
-	$hash = md5($password);
 	$email = isset($_POST['email']) ? $_POST['email'] : null;
 	$IsAdmin = (isset($_POST['yes']))?1:0;
 	
@@ -25,7 +24,7 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $userna
 			':prefix' => $prefix,
 			':lastname' => $lastname,
 			':username' => $username,
-			':password' => $hash,
+			':password' => $password,
 			':email' => $email,
 			':IsAdmin' => $IsAdmin
 			));
@@ -38,7 +37,7 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $userna
 			':prefix' => $prefix,
 			':lastname' => $lastname,
 			':username' => $username,
-			':password' => $hash,
+			':password' => $password,
 			':email' => $email
 			));
 	}
@@ -56,7 +55,7 @@ function loginUser($username = null, $password = null)
     $db = openDatabaseConnection();
 
     $result1 = $db->prepare("SELECT * FROM login WHERE username = '$username' AND  password = '$password'");
- 	$result1->execute(array());
+ 	$result1->execute();
     if($result1->rowCount() > 0 )
 	{
 		$_SESSION['logged in'] = true;
