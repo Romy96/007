@@ -7,6 +7,7 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $userna
 	$lastname = isset($_POST['lastname']) ? $_POST['lastname'] : null;
 	$username = isset($_POST['username']) ? $_POST['username'] : null;
 	$password = isset($_POST['password']) ? $_POST['password'] : null;
+	$hash = md5($password);
 	$email = isset($_POST['email']) ? $_POST['email'] : null;
 	$IsAdmin = (isset($_POST['yes']))?1:0;
 	
@@ -24,7 +25,7 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $userna
 			':prefix' => $prefix,
 			':lastname' => $lastname,
 			':username' => $username,
-			':password' => $password,
+			':password' => $hash,
 			':email' => $email,
 			':IsAdmin' => $IsAdmin
 			));
@@ -37,7 +38,7 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $userna
 			':prefix' => $prefix,
 			':lastname' => $lastname,
 			':username' => $username,
-			':password' => $password,
+			':password' => $hash,
 			':email' => $email
 			));
 	}
@@ -50,6 +51,11 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $userna
 
 function loginUser()
 {
+	$db = openDatabaseConnection();
+
+	$username = $_POST['username'];
+	$password = md5($_POST['password']);
+
     $result1 = $db->prepare("SELECT * FROM login WHERE username = '$username' AND  password = '$password'");
  	$result1->execute();
     if($result1->rowCount() > 0 )
@@ -82,9 +88,47 @@ function IsAdmin() {
 }
 
 function getUser($id) 
-=======
+{
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT * FROM login WHERE id=:id ";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':id' => $id
+	));
+
+	$db = null;
+
+	return $query->fetch(PDO::FETCH_ASSOC);
+}
+
+function getAllUsers() 
+{
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT * FROM login";
+	$query = $db->prepare($sql);
+	$query->execute();
+
+	$db = null;
+
+	return $query->fetchAll();
+}
+
+function deleteUser($id) 
+{
+	$db = openDatabaseConnection();
+
+	$sql = "DELETE FROM login WHERE id=:id ";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':id' => $id
+	));
+
+	$db = null;
+}
+
 function checkEmail($email)
->>>>>>> ac36991e2a59d6a3468e1f756e96c9d79708a63c
 {
 	$db = openDatabaseConnection();
 
