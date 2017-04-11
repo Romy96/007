@@ -58,10 +58,13 @@ function loginUser()
 
     $result1 = $db->prepare("SELECT * FROM login WHERE username = '$username' AND  password = '$password'");
  	$result1->execute();
+ 	$row = $result1->fetch(PDO::FETCH_ASSOC);
     if($result1->rowCount() > 0 )
 	{
+		$_SESSION['userId'] = $row['id'];
 		$_SESSION['logged in'] = true;
 		$_SESSION['username'] = $username;
+		$_SESSION['isAdmin'] = $row['isAdmin'] ;
 		$db = null;
 		return true;
 	}
@@ -74,7 +77,7 @@ function loginUser()
 }
 
 function IsLoggedInSession() {
-	if (isset($_SESSION['logged in'])==false) {
+	if (isset($_SESSION['userId'])==false || empty($_SESSION['userId']) ) {
 		return 0;
 	}
 	else

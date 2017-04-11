@@ -89,15 +89,7 @@ function delete($id)
 		render("login/login");
 		exit();
 	}
-
-	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
-	{
-		echo "U bent wel ingelogd, maar u bent geen beheerder!";
-		render("login/index");
-		exit();
-	}
-
-	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	else
 	{
 		$user = getUser($id);
 
