@@ -48,8 +48,13 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $userna
 }
 
 
-function loginUser()
+function loginUser($username = null, $password = null)
 {
+	$username = $_POST['username'];
+	$username = $_POST['password'];
+
+	$db = openDatabaseConnection();
+
     $result1 = $db->prepare("SELECT * FROM login WHERE username = '$username' AND  password = '$password'");
  	$result1->execute();
     if($result1->rowCount() > 0 )
@@ -82,9 +87,21 @@ function IsAdmin() {
 }
 
 function getUser($id) 
-=======
+{
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT * FROM login WHERE id=:id ";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':id' => $id
+	));
+
+	$db = null;
+
+	return $query->fetch(PDO::FETCH_ASSOC);
+}
+
 function checkEmail($email)
->>>>>>> ac36991e2a59d6a3468e1f756e96c9d79708a63c
 {
 	$db = openDatabaseConnection();
 

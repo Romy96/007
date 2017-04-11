@@ -28,6 +28,7 @@ function login()
 		exit();
 	}
 	else {
+		session_start();
 		if(isset($_POST["username"]) && isset($_POST["password"])) {
 			if(loginUser($_POST['username'], $_POST['password']))
 			{
