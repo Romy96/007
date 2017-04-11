@@ -28,6 +28,7 @@ function login()
 		exit();
 	}
 	else {
+		session_start();
 		if(isset($_POST["username"]) && isset($_POST["password"])) {
 			if(loginUser($_POST['username'], $_POST['password']))
 			{
@@ -67,10 +68,8 @@ function registerSave()
 		echo 'U heeft een veld niet ingevuld';
 		render("login/register");
 		exit();
-	}
-
-	// if fields are filled, call function
-	if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
+	} else {
+		// if fields are filled, call function
 		createUser($_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email']);
 		header("Location:" . URL . "login/message");
 		exit();

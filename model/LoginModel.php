@@ -49,7 +49,7 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $userna
 }
 
 
-function loginUser()
+function loginUser($username = null, $password = null)
 {
 	$db = openDatabaseConnection();
 
@@ -105,6 +105,8 @@ function getUser($id)
 	return $query->fetch(PDO::FETCH_ASSOC);
 }
 
+<<<<<<< HEAD
+=======
 function getAllUsers() 
 {
 	$db = openDatabaseConnection();
@@ -131,6 +133,7 @@ function deleteUser($id)
 	$db = null;
 }
 
+>>>>>>> 689f52bd008393f1c84e0b724f8f4fb9673c714c
 function checkEmail($email)
 {
 	$db = openDatabaseConnection();
