@@ -64,7 +64,7 @@ function loginUser($username = null, $password = null)
 		$_SESSION['userId'] = $row['id'];
 		$_SESSION['logged in'] = true;
 		$_SESSION['username'] = $username;
-		$_SESSION['isAdmin'] = $row['isAdmin'] ;
+		$_SESSION['isAdmin'] = $row['is_admin'] ;
 		$db = null;
 		return true;
 	}
@@ -152,4 +152,12 @@ function checkEmail($email)
 function sendEmail()
 {
 	
+}
+
+function LogOut() {
+	echo "Logged out";
+	header("location: ". URL ."login/login");
+
+	unset($_SESSION['userId'], $_SESSION['username'], $_SESSION['isAdmin']);
+	$_SESSION = [];
 }

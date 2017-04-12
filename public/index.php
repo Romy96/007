@@ -6,4 +6,6 @@ require(ROOT . "core/config.php");
 require(ROOT . "core/route.php");
 require(ROOT . "core/core.php");
 
+session_start();
+
 route();

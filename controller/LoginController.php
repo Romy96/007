@@ -47,6 +47,7 @@ function login()
 	}
 }
 
+
 function register()
 {
 	if ( IsLoggedInSession()==true ) {
