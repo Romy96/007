@@ -23,3 +23,22 @@ function index()
 	}
 
 }
+
+function users() 
+{
+	$users = getAllUsers();
+
+	if(empty($users)) 
+	{
+		renderBackend("backend/users");
+		exit();
+	}
+
+	else 
+	{
+		renderBackend("backend/users", array(
+			'users' => $users
+		));
+		exit();
+	}
+}
