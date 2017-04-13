@@ -15,6 +15,7 @@
 		<li>Gebruiker: <?=$_SESSION['username']?></li>
 		<li><a href="<?= URL ?>/login/logOut">Uitloggen</a></li>
 		<li><a href="events_list.php">Beheer</a></li>
+		<li><a href="<?= URL ?>login/profile/<?= $_SESSION['userId'] ?>">Profiel</a></li>
 		<?php
 		; else:
 		?>

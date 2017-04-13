@@ -154,3 +154,16 @@ function sendmail()
 {
 	render("login/sendmail");
 }
+
+function profile($id)
+{
+	$profile = getUser($id);
+	render("login/profile", array(
+		'profile' => $profile
+	));
+}
+
+function profileEdit()
+{
+
+}
