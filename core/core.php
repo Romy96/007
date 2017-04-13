@@ -23,3 +23,17 @@ function render($filename, $data = null)
 	require(ROOT . 'view/' . $filename . '.php');
 	require(ROOT . 'view/templates/footer.php');
 }
+
+function renderBackend($filename, $data = null)
+{
+	if ($data) {
+
+		foreach($data as $key => $value) {
+			$$key = $value;
+		}
+	} 
+
+	require(ROOT . 'view/templates/headerBackend.php');
+	require(ROOT . 'view/' . $filename . '.php');
+	require(ROOT . 'view/templates/footerBackend.php');
+}

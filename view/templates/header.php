@@ -13,8 +13,8 @@
 		if(isset($_SESSION['userId'])):
 		?>
 		<li>Gebruiker: <?=$_SESSION['username']?></li>
-		<li><a href="<?= URL ?>/login/logOut">Uitloggen</a></li>
-		<li><a href="events_list.php">Beheer</a></li>
+		<li><a href="<?= URL ?>login/logOut">Uitloggen</a></li>
+		<li><a href="<?= URL ?>backend/index">Beheer</a></li>
 		<?php
 		; else:
 		?>

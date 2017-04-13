@@ -154,3 +154,4 @@ function sendmail()
 {
 	render("login/sendmail");
 }
+
