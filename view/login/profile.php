@@ -9,11 +9,5 @@ Gebruikersnaam: <?= $profile['username'];?>
 Email: <?= $profile['email'];?>
 <br/>
 <br/>
-<a href="<?= URL ?>login/profileEdit.php">Wijzig profiel</a>
+<a href="<?= URL ?>login/profileEdit/<?= $_SESSION['userId'] ?>">Wijzig profiel</a>
 </p>
-
-
-
-<?php
-var_dump($profile);
-?>

@@ -161,3 +161,24 @@ function LogOut() {
 	unset($_SESSION['userId'], $_SESSION['username'], $_SESSION['isAdmin']);
 	$_SESSION = [];
 }
+
+function editSaveProfile($id, $firstname, $prefix, $lastname, $username, $password, $email, $is_admin)
+{
+	// create database connection
+	$db = openDatabaseConnection();
+	// prepare query and execute
+	$sql = "UPDATE login SET firstname=:firstname, prefix=:prefix, lastname=:lastname, username=:username, password=:password, email=:email, is_admin=:is_admin WHERE id=:id";
+		$query = $db->prepare($sql);
+		$query->execute(array(
+		':id' => $id,
+		':firstname' => $firstname,
+		':prefix' => $prefix,
+		':lastname' => $lastname,
+		':username' => $username,
+		':password' => md5($password),
+		':email' => $email,
+		':is_admin' => $is_admin
+	));
+	// close connection
+	$db = NULL;
+}
