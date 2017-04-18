@@ -96,3 +96,57 @@ function editSave($id = '')
 		exit();
 	}
 }
+
+function profile($id = '') 
+{
+	//Roep functie op met id in het variable
+	$user = getUser($id);
+
+
+	//Als het leeg geef, dan geef het alleen deze zin weer.
+	if(empty($user)) {
+		echo ('Geen resultaat');
+	}
+
+	//Als id bestaan, geef dan formulier weer.
+	if (isset($id)) {
+		renderBackend("backend/profile", array(
+			'user' => $user,
+		));
+	}
+	else 
+	{
+		//Zoniet, dan terug naar het tabel.
+		renderBackend("backend/index");
+	}
+}
+
+function profileSave($id = '')
+{
+	if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
+		echo 'U heeft een veld niet ingevuld';
+		$user = getUser($id);
+		renderBackend("backend/profile", array(
+			'user' => $user
+		));
+		exit();
+	}
+
+	// Als de waardes van de velden in het formulier bestaan, voer dan functie uit.
+	if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
+		//die('stop');
+		saveProfile($id, $_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email']);
+		renderBackend("backend/index");
+		exit();
+	}
+	else {
+		//Zoniet, dan ga je terug naar het formulier.
+		echo 'Geen resultaat';
+		$user = getUser($id);
+		renderBackend("backend/profile", array(
+			'user' => $user
+		));
+		exit();
+	}
+
+}

@@ -184,3 +184,32 @@ function editUser($id = null, $username = null, $password = null, $email = null)
 
 	$db = null;
 }
+
+function saveProfile($id = null, $firstname = null, $prefix = null, $lastname = null, $username = null, $password = null, $email = null)
+{
+	$firstname = isset($_POST['firstname']) ? $_POST['firstname'] : null;
+	$prefix = isset($_POST['prefix']) ? $_POST['prefix'] : null;
+	$lastname = isset($_POST['lastname']) ? $_POST['lastname'] : null;
+	$username = isset($_POST['username']) ? $_POST['username'] : null;
+	$password = isset($_POST['password']) ? $_POST['password'] : null;
+	$hash = md5($password);
+	$email = isset($_POST['email']) ? $_POST['email'] : null;
+	$id = isset($_POST['id']) ? $_POST['id'] : null;
+
+	//Bewerkt het patient als alles op orde loopt.
+	$db = openDatabaseConnection();
+
+	$sql = "UPDATE login SET firstname=:firstname, prefix=:prefix, lastname=:lastname, username=:username, password=:password, email=:email WHERE id=:id";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':firstname' => $firstname,
+		':prefix' => $prefix,
+		':lastname' => $lastname,
+		':username' => $username,
+		':password' => $hash,
+		':email' => $email,
+		':id' => $id
+		));
+
+	$db = null;
+}
