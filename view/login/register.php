@@ -2,27 +2,19 @@
 <form action="<?= URL ?>login/registerSave" method="post">
 	<div>
 		<label for="firstname">Firstname:</label>
-		<div class="input-group margin-bottom-sm">
 		<input class="form-control"  type="text" name="firstname">
-		</div>
 	</div>
 	<div>
 		<label for="prefix">Prefix:</label>
-		<div class="input-group margin-bottom-sm">
 		<input class="form-control"  type="text" name="prefix">
-		</div>
 	</div>
 	<div>
 		<label for="lastname">Lastname:</label>
-		<div class="input-group margin-bottom-sm">
 		<input class="form-control"  type="text" name="lastname">
-		</div>
 	</div>
 	<div>
 		<label for="username">Username:</label>
-		<div class="input-group margin-bottom-sm">
 		<input class="form-control"  type="text" name="username">
-		</div>
 	</div>
 	<div>
 		<label for="password">Password:</label>

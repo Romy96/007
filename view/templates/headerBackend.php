@@ -77,7 +77,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="<?= URL ?>backend/profile" class="btn btn-default btn-flat"><i class="fa fa-address-book" aria-hidden="true"></i> Profile</a>
+                  <a href="<?= URL ?>backend/profile/<?=$_SESSION['userId']?>" class="btn btn-default btn-flat"><i class="fa fa-address-book" aria-hidden="true"></i> Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="<?= URL ?>login/logOut" class="btn btn-default btn-flat"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign out</a>
