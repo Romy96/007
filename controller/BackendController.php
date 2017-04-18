@@ -121,6 +121,31 @@ function profile($id = '')
 	}
 }
 
+function editProfile($id = '')
+{
+	//Roep functie op met id in het variable
+	$user = getUser($id);
+
+
+	//Als het leeg geef, dan geef het alleen deze zin weer.
+	if(empty($user)) {
+		echo ('Geen resultaat');
+	}
+
+	//Als id bestaan, geef dan formulier weer.
+	if (isset($id)) {
+		renderBackend("backend/editProfile", array(
+			'user' => $user,
+		));
+	}
+	else 
+	{
+		renderBackend("backend/profile", array(
+			'user' => $user,
+		));
+	}
+}
+
 function profileSave($id = '')
 {
 	if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
