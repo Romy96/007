@@ -1,5 +1,5 @@
 <h1>Profielwijziging</h1>
-<form action="<?= URL ?>login/profileEditSave" method="post">
+<form action="<?= URL ?>login/profileEditSave/<?= $_SESSION['userId'] ?>" method="post">
 	<div>
 		<input type="hidden" name="id" value="<?= $profile['id'];?>">
 		<label for="firstname">Firstname:</label>
