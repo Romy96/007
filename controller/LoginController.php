@@ -155,4 +155,28 @@ function sendmail()
 	render("login/sendmail");
 }
 
+function profile($id)
+{
+	$profile = getUser($id);
+	render("login/profile", array(
+		'profile' => $profile
+	));
+}
 
+function profileEdit($id)
+{
+	$profile = getUser($id);
+	render("login/profileEdit", array(
+		'profile' => $profile
+	));
+}
+
+function profileEditSave()
+{
+	// if fields are filled, call function
+	if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
+		editSaveProfile($_POST['id'], $_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email'], $_POST['is_admin']);
+	}
+
+	header("Location:" . URL . "login/profile/" . $_SESSION['userId']);
+}

@@ -185,6 +185,7 @@ function editUser($id = null, $username = null, $password = null, $email = null)
 	$db = null;
 }
 
+
 function saveProfile($id = null, $firstname = null, $prefix = null, $lastname = null, $username = null, $password = null, $email = null)
 {
 	$firstname = isset($_POST['firstname']) ? $_POST['firstname'] : null;
@@ -213,3 +214,25 @@ function saveProfile($id = null, $firstname = null, $prefix = null, $lastname = 
 
 	$db = null;
 }
+
+function editSaveProfile($id, $firstname, $prefix, $lastname, $username, $password, $email, $is_admin)
+{
+	// create database connection
+	$db = openDatabaseConnection();
+	// prepare query and execute
+	$sql = "UPDATE login SET firstname=:firstname, prefix=:prefix, lastname=:lastname, username=:username, password=:password, email=:email, is_admin=:is_admin WHERE id=:id";
+		$query = $db->prepare($sql);
+		$query->execute(array(
+		':id' => $id,
+		':firstname' => $firstname,
+		':prefix' => $prefix,
+		':lastname' => $lastname,
+		':username' => $username,
+		':password' => md5($password),
+		':email' => $email,
+		':is_admin' => $is_admin
+	));
+	// close connection
+	$db = NULL;
+}
+
