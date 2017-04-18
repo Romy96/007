@@ -50,7 +50,7 @@
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="<?=URL?>backend/editUser" class="btn btn-default btn-flat"><i class="fa fa-pencil"></i></a>
+                                            <a href="<?=URL?>backend/edit/<?=$row['id']?>" class="btn btn-default btn-flat"><i class="fa fa-pencil"></i></a>
                                         </div>
                                     </td>
                                 </tr>

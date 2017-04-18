@@ -54,41 +54,46 @@
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
+          <?php
+            if(isset($_SESSION['userId'])):
+           ?>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!--<img src="#" class="user-image" alt="User Image">-->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs"><?=$_SESSION['username']?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
                 <!--<img src="#" class="img-circle" alt="User Image">-->
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  <?=$_SESSION['username']?>
                 </p>
               </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="<?= URL ?>backend/profile" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?= URL ?>login/logOut" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
+            <?php
+            endif;
+            ?>
           </li>
           <!-- Control Sidebar Toggle Button -->
         </ul>
       </div>
     </nav>
   </header>
+
   <!-- Left side column. contains the logo and sidebar -->
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->

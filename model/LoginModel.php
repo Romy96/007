@@ -161,3 +161,26 @@ function LogOut() {
 	unset($_SESSION['userId'], $_SESSION['username'], $_SESSION['isAdmin']);
 	$_SESSION = [];
 }
+
+function editUser($id = null, $username = null, $password = null, $email = null) 
+{
+	$username = isset($_POST['username']) ? $_POST['username'] : null;
+	$password = isset($_POST['password']) ? $_POST['password'] : null;
+	$hash = md5($password);
+	$email = isset($_POST['email']) ? $_POST['email'] : null;
+	$id = isset($_POST['id']) ? $_POST['id'] : null;
+
+	//Bewerkt het patient als alles op orde loopt.
+	$db = openDatabaseConnection();
+
+	$sql = "UPDATE login SET username=:username, password=:password, email=:email WHERE id=:id";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':username' => $username,
+		':password' => $hash,
+		':email' => $email,
+		':id' => $id
+		));
+
+	$db = null;
+}
