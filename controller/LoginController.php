@@ -171,12 +171,15 @@ function profileEdit($id)
 	));
 }
 
-function profileEditSave()
+function profileEditSave($id)
 {
 	// if fields are filled, call function
-	if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
-		editSaveProfile($_POST['id'], $_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email'], $_POST['is_admin']);
+	if (empty($_POST['password'])) {
+		echo "Vul alle velden in!";
+		profileEdit($id);
 	}
-
-	header("Location:" . URL . "login/profile/" . $_SESSION['userId']);
+	else if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
+		editSaveProfile($_POST['id'], $_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email'], $_POST['is_admin']);
+		header("Location:" . URL . "login/profile/" . $_SESSION['userId']);
+	}
 }
