@@ -3,8 +3,9 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Project</title>	
-	<link rel="stylesheet" href="<?= URL ?>">
+	<title>Webshop</title>	
+	<link rel="stylesheet" href="<?= URL ?>css/font-awesome.min.css">
+	<link rel="stylesheet" href="<?= URL ?>css/bootstrap.min.css">
 </head>
 <body>
 	<nav>
@@ -12,14 +13,14 @@
 		<?php
 		if(isset($_SESSION['userId'])):
 		?>
-		<li>Gebruiker: <?=$_SESSION['username']?></li>
-		<li><a href="<?= URL ?>login/logOut">Uitloggen</a></li>
-		<li><a href="<?= URL ?>backend/index">Beheer</a></li>
+		<li><i class="fa fa-user" aria-hidden="true"></i> Gebruiker: <?=$_SESSION['username']?> </li>
+		<li><a href="<?= URL ?>login/logOut"><i class="fa fa-sign-out" aria-hidden="true"></i> Uitloggen </a></li>
+		<li><a href="<?= URL ?>backend/index"><i class="fa fa-server" aria-hidden="true"></i> Beheer </a></li>
 		<?php
 		; else:
 		?>
-		<li><a href="<?= URL ?>login/login">Login</a></li>
-		<li><a href="<?= URL ?>login/register">Registreren</a></li>
+		<li><a href="<?= URL ?>login/login"><i class="fa fa-sign-in" aria-hidden="true"></i> Login </a></li>
+		<li><a href="<?= URL ?>login/register"><i class="fa fa-user-plus" aria-hidden="true"></i> Registreren </a></li>
 		<?php
 		endif;
 		?>

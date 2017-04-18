@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Dashboard</title>
+  <title>Beheer webshop</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
   <link rel="stylesheet" href="<?= URL ?>css/bootstrap.min.css">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<?= URL ?>css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Theme style -->
@@ -64,7 +64,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!--<img src="#" class="user-image" alt="User Image">-->
-              <span class="hidden-xs"><?=$_SESSION['username']?></span>
+              <span class="hidden-xs"><i class="fa fa-user" aria-hidden="true"></i> <?=$_SESSION['username']?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -77,10 +77,10 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="<?= URL ?>backend/profile" class="btn btn-default btn-flat">Profile</a>
+                  <a href="<?= URL ?>backend/profile" class="btn btn-default btn-flat"><i class="fa fa-address-book" aria-hidden="true"></i> Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="<?= URL ?>login/logOut" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?= URL ?>login/logOut" class="btn btn-default btn-flat"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign out</a>
                 </div>
               </li>
             </ul>
@@ -119,8 +119,8 @@
 			<?php
 			if(isset($_SESSION['userId'])):
 			?>
-            <li><a href="<?= URL ?>login/logOut"><i class="fa fa-circle-o"></i>Uitloggen</a></li>
-            <li><a href="<?= URL ?>backend/users"><i class="fa fa-circle-o"></i>Gebruikers</a></li>
+            <li><a href="<?= URL ?>login/logOut"><i class="fa fa-sign-out" aria-hidden="true"></i>Uitloggen</a></li>
+            <li><a href="<?= URL ?>backend/users"><i class="fa fa-users" aria-hidden="true"></i>Gebruikers</a></li>
             <?php
             endif;
             ?>
