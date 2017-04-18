@@ -183,6 +183,7 @@ function editUser($id = null, $username = null, $password = null, $email = null)
 		));
 
 	$db = null;
+}
 
 function editSaveProfile($id, $firstname, $prefix, $lastname, $username, $password, $email, $is_admin)
 {
