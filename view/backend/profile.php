@@ -16,9 +16,6 @@ if(isset($user)):
 		<label for="username">Username: <?=$user['username']?></label>
 	</div>
 	<div>
-		<label for="password">Password: <?=$user['password']?></label>
-	</div>
-	<div>
 		<label for="email">Email: <?=$user['email']?></label>
 	</div>
 	<div>

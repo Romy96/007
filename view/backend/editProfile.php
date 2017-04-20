@@ -21,13 +21,6 @@ if(isset($user)):
 		<input class="form-control"  type="text" name="username" value="<?=$user['username']?>">
 	</div>
 	<div>
-		<label for="password">Password:</label>
-		<div class="input-group margin-bottom-sm">
-		<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-		<input class="form-control" type="password" name="password" value="<?=$user['password']?>">
-		</div>
-	</div>
-	<div>
 		<label for="email">Email:</label>
 		<div class="input-group margin-bottom-sm">
 		<span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
