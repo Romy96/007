@@ -170,7 +170,7 @@ function editUser($id = null, $username = null, $password = null, $email = null)
 	$email = isset($_POST['email']) ? $_POST['email'] : null;
 	$id = isset($_POST['id']) ? $_POST['id'] : null;
 
-	//Bewerkt het patient als alles op orde loopt.
+	//Bewerkt de patient als alles op orde loopt.
 	$db = openDatabaseConnection();
 
 	$sql = "UPDATE login SET username=:username, password=:password, email=:email WHERE id=:id";
@@ -197,7 +197,7 @@ function saveProfile($id = null, $firstname = null, $prefix = null, $lastname = 
 	$email = isset($_POST['email']) ? $_POST['email'] : null;
 	$id = isset($_POST['id']) ? $_POST['id'] : null;
 
-	//Bewerkt het patient als alles op orde loopt.
+	//Bewerkt de patient als alles op orde loopt.
 	$db = openDatabaseConnection();
 
 	$sql = "UPDATE login SET firstname=:firstname, prefix=:prefix, lastname=:lastname, username=:username, password=:password, email=:email WHERE id=:id";
