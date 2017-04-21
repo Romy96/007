@@ -10,7 +10,6 @@
                     <table class="data-table table table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>Sorteer</th>
                             <th>Voornaam</th>
                             <th>Achternaam</th>
                             <th>Gebruikersnaam</th>
@@ -27,9 +26,6 @@
                             foreach($users as $row):
                         ?>
                                 <tr>
-                                    <td>
-                                        <?=$row['id']?>
-                                    </td>
                                     <td>
                                         <?=$row['firstname']?>
                                     </td>

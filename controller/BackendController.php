@@ -161,17 +161,47 @@ function profileSave($id = '')
 	if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
 		//die('stop');
 		saveProfile($id, $_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email']);
-		renderBackend("backend/index");
-		exit();
-	}
-	else {
-		//Zoniet, dan ga je terug naar het formulier.
-		echo 'Geen resultaat';
 		$user = getUser($id);
 		renderBackend("backend/profile", array(
 			'user' => $user
 		));
 		exit();
 	}
+	else {
+		//Zoniet, dan ga je terug naar het formulier.
+		echo 'Geen resultaat';
+		$user = getUser($id);
+		renderBackend("backend/editProfile", array(
+			'user' => $user
+		));
+		exit();
+	}
 
 }
+
+function uploadImg($id = '')
+{
+	//Roep functie op met id in het variable
+	$user = getUser($id);
+
+
+	//Als het leeg geef, dan geef het alleen deze zin weer.
+	if(empty($user)) {
+		echo ('Geen resultaat');
+	}
+
+	//Als id bestaan, geef dan formulier weer.
+	if (isset($id)) {
+		renderBackend("backend/uploadImg", array(
+			'user' => $user,
+		));
+	}
+	else 
+	{
+		renderBackend("backend/profile", array(
+			'user' => $user,
+		));
+	}
+
+}
+
