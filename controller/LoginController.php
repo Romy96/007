@@ -174,7 +174,7 @@ function profileEdit($id)
 function profileEditSave($id)
 {
 	// if fields are filled, call function
-	if (empty($_POST['password'])) {
+	if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
 		echo "Vul alle velden in!";
 		profileEdit($id);
 	}
