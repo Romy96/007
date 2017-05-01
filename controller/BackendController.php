@@ -26,182 +26,253 @@ function index()
 
 function users() 
 {
-	$users = getAllUsers();
-
-	if(empty($users)) 
-	{
-		renderBackend("backend/users");
-		exit();
+	if ( IsLoggedInSession()==false ) {
+	echo "U heeft nog niet ingelogd";
+	render('login/login');
+	exit;
 	}
 
-	else 
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
 	{
-		renderBackend("backend/users", array(
-			'users' => $users
-		));
-		exit();
+		echo "U bent wel ingelogd, maar u bent geen admin.";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		$users = getAllUsers();
+
+		if(empty($users)) 
+		{
+			renderBackend("backend/users");
+			exit();
+		}
+
+		else 
+		{
+			renderBackend("backend/users", array(
+				'users' => $users
+			));
+			exit();
+		}
 	}
 }
 
 function edit($id = '')
 {
-	//Roep functie op met id in het variable
-	$user = getUser($id);
-
-
-	//Als het leeg geef, dan geef het alleen deze zin weer.
-	if(empty($user)) {
-		echo ('Geen resultaat');
+	if ( IsLoggedInSession()==false ) {
+	echo "U heeft nog niet ingelogd";
+	render('login/login');
+	exit;
 	}
 
-	//Als id bestaan, geef dan formulier weer.
-	if (isset($id)) {
-		renderBackend("backend/edit", array(
-			'user' => $user,
-		));
-	}
-	else 
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
 	{
-		//Zoniet, dan terug naar het tabel.
-		renderBackend("backend/users", array(
-			'users' => getAllUsers()
-		));
+		echo "U bent wel ingelogd, maar u bent geen admin.";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		//Roep functie op met id in het variable
+		$user = getUser($id);
+
+
+		//Als het leeg geef, dan geef het alleen deze zin weer.
+		if(empty($user)) {
+			echo ('Geen resultaat');
+		}
+
+		//Als id bestaan, geef dan formulier weer.
+		if (isset($id)) {
+			renderBackend("backend/edit", array(
+				'user' => $user,
+			));
+		}
+		else 
+		{
+			//Zoniet, dan terug naar het tabel.
+			renderBackend("backend/users", array(
+				'users' => getAllUsers()
+			));
+		}
 	}
 }
 
 function editSave($id = '') 
 {
-	if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
-		echo 'U heeft een veld niet ingevuld';
-		$user = getUser($id);
-		renderBackend("backend/edit", array(
-			'user' => $user
-		));
+	if ( IsLoggedInSession()==false ) {
+	echo "U heeft nog niet ingelogd";
+	render('login/login');
+	exit;
 	}
 
-	// Als de waardes van de velden in het formulier bestaan, voer dan functie uit.
-	if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
-		//die('stop');
-		editUser($id, $_POST['username'], $_POST['password'], $_POST['email']);
-		header("Location:" . URL . "backend/users");
-		exit();
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "U bent wel ingelogd, maar u bent geen admin.";
+		render("login/index");
+		exit;
 	}
-	else {
-		//Zoniet, dan ga je terug naar het formulier.
-		echo 'Geen resultaat';
-		$user = getUser($id);
-		renderBackend("backend/edit", array(
-			'user' => $user
-		));
-		exit();
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
+			echo 'U heeft een veld niet ingevuld';
+			$user = getUser($id);
+			renderBackend("backend/edit", array(
+				'user' => $user
+			));
+		}
+
+		// Als de waardes van de velden in het formulier bestaan, voer dan functie uit.
+		if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
+			//die('stop');
+			editUser($id, $_POST['username'], $_POST['password'], $_POST['email']);
+			header("Location:" . URL . "backend/users");
+			exit();
+		}
+		else {
+			//Zoniet, dan ga je terug naar het formulier.
+			echo 'Geen resultaat';
+			$user = getUser($id);
+			renderBackend("backend/edit", array(
+				'user' => $user
+			));
+			exit();
+		}
 	}
 }
 
 function profile($id = '') 
 {
-	//Roep functie op met id in het variable
-	$user = getUser($id);
-
-
-	//Als het leeg geef, dan geef het alleen deze zin weer.
-	if(empty($user)) {
-		echo ('Geen resultaat');
+	if ( IsLoggedInSession()==false ) {
+	echo "U heeft nog niet ingelogd";
+	render('login/login');
+	exit;
 	}
 
-	//Als id bestaan, geef dan formulier weer.
-	if (isset($id)) {
-		renderBackend("backend/profile", array(
-			'user' => $user,
-		));
-	}
-	else 
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
 	{
-		//Zoniet, dan terug naar het tabel.
-		renderBackend("backend/index");
+		echo "U bent wel ingelogd, maar u bent geen admin.";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		//Roep functie op met id in het variable
+		$user = getUser($id);
+
+
+		//Als het leeg geef, dan geef het alleen deze zin weer.
+		if(empty($user)) {
+			echo ('Geen resultaat');
+		}
+
+		//Als id bestaan, geef dan formulier weer.
+		if (isset($id)) {
+			renderBackend("backend/profile", array(
+				'user' => $user,
+			));
+		}
+		else 
+		{
+			//Zoniet, dan terug naar het tabel.
+			renderBackend("backend/index");
+		}
 	}
 }
 
 function editProfile($id = '')
 {
-	//Roep functie op met id in het variable
-	$user = getUser($id);
-
-
-	//Als het leeg geef, dan geef het alleen deze zin weer.
-	if(empty($user)) {
-		echo ('Geen resultaat');
+	if ( IsLoggedInSession()==false ) {
+	echo "U heeft nog niet ingelogd";
+	render('login/login');
+	exit;
 	}
 
-	//Als id bestaan, geef dan formulier weer.
-	if (isset($id)) {
-		renderBackend("backend/editProfile", array(
-			'user' => $user,
-		));
-	}
-	else 
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
 	{
-		renderBackend("backend/profile", array(
-			'user' => $user,
-		));
+		echo "U bent wel ingelogd, maar u bent geen admin.";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		//Roep functie op met id in het variable
+		$user = getUser($id);
+
+
+		//Als het leeg geef, dan geef het alleen deze zin weer.
+		if(empty($user)) {
+			echo ('Geen resultaat');
+		}
+
+		//Als id bestaan, geef dan formulier weer.
+		if (isset($id)) {
+			renderBackend("backend/editProfile", array(
+				'user' => $user,
+			));
+		}
+		else 
+		{
+			renderBackend("backend/profile", array(
+				'user' => $user,
+			));
+		}
 	}
 }
 
 function profileSave($id = '')
 {
-	if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
-		echo 'U heeft een veld niet ingevuld';
-		$user = getUser($id);
-		renderBackend("backend/profile", array(
-			'user' => $user
-		));
-		exit();
+	if ( IsLoggedInSession()==false ) {
+	echo "U heeft nog niet ingelogd";
+	render('login/login');
+	exit;
 	}
 
-	// Als de waardes van de velden in het formulier bestaan, voer dan functie uit.
-	if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
-		//die('stop');
-		saveProfile($id, $_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email']);
-		$user = getUser($id);
-		renderBackend("backend/profile", array(
-			'user' => $user
-		));
-		exit();
-	}
-	else {
-		//Zoniet, dan ga je terug naar het formulier.
-		echo 'Geen resultaat';
-		$user = getUser($id);
-		renderBackend("backend/editProfile", array(
-			'user' => $user
-		));
-		exit();
-	}
-
-}
-
-function uploadImg($id = '')
-{
-	//Roep functie op met id in het variable
-	$user = getUser($id);
-
-
-	//Als het leeg geef, dan geef het alleen deze zin weer.
-	if(empty($user)) {
-		echo ('Geen resultaat');
-	}
-
-	//Als id bestaan, geef dan formulier weer.
-	if (isset($id)) {
-		renderBackend("backend/uploadImg", array(
-			'user' => $user,
-		));
-	}
-	else 
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
 	{
-		renderBackend("backend/profile", array(
-			'user' => $user,
-		));
+		echo "U bent wel ingelogd, maar u bent geen admin.";
+		render("login/index");
+		exit;
 	}
 
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
+			echo 'U heeft een veld niet ingevuld';
+			$user = getUser($id);
+			renderBackend("backend/profile", array(
+				'user' => $user
+			));
+			exit();
+		}
+
+		// Als de waardes van de velden in het formulier bestaan, voer dan functie uit.
+		if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
+			//die('stop');
+			saveProfile($id, $_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email']);
+			$user = getUser($id);
+			renderBackend("backend/profile", array(
+				'user' => $user
+			));
+			exit();
+		}
+		else {
+			//Zoniet, dan ga je terug naar het formulier.
+			echo 'Geen resultaat';
+			$user = getUser($id);
+			renderBackend("backend/editProfile", array(
+				'user' => $user
+			));
+			exit();
+		}
+	}
 }
+
+
 

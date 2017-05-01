@@ -63,24 +63,38 @@ function register()
 
 function registerSave()
 {
-
-	if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
-		echo 'U heeft een veld niet ingevuld';
-		render("login/register");
+	if ( IsLoggedInSession()==true ) {
+		echo "U bent al ingelogd!";
+		render("login/index");
 		exit();
 	}
+	else 
+	{
+		if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
+			echo 'U heeft een veld niet ingevuld';
+			render("login/register");
+			exit();
+		}
 
-	// if fields are filled, call function
-	if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
-		createUser($_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email']);
-		header("Location:" . URL . "login/message");
-		exit();
+		// if fields are filled, call function
+		if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
+			createUser($_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email']);
+			header("Location:" . URL . "login/message");
+			exit();
+		}
 	}
 }
 
 function message()
-{
-	render("login/message");
+{	if ( IsLoggedInSession()==true ) {
+		echo "U hebt al een account!";
+		render("login/index");
+		exit();
+	}
+	else 
+	{
+		render("login/message");
+	}
 }
 
 function delete($id) 
@@ -115,33 +129,57 @@ function delete($id)
 
 function deleteAction($id)
 {
-	$user = getUser($id);
-	
-		//Als id bestaan, voer dan functie uit.
-	if (isset($id)) {
-		deleteUser($id);
+	 if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd!";
+		render("login/login");
+		exit();
 	}
 	else
 	{
-		echo 'Id van gebruiker niet gevonden';
-		render("login/delete", array(
-			'user' => $user
-		));
+		$user = getUser($id);
+		
+			//Als id bestaan, voer dan functie uit.
+		if (isset($id)) {
+			deleteUser($id);
+		}
+		else
+		{
+			echo 'Id van gebruiker niet gevonden';
+			render("login/delete", array(
+				'user' => $user
+			));
+		}
+		header("Location:" . URL . "login/login");
 	}
-	header("Location:" . URL . "login/login");
 }
 
 function forgot()
 {
-	render("login/forgot");
+	if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd!";
+		render("login/login");
+		exit();
+	}
+	else
+	{
+		render("login/forgot");
+	}
 }
 
 function sendNewPassword()
 {
-	if (isset($_POST['email'])){
-		$user = checkEmail($_POST['email']);
-		if (!empty($user)) {
-			header("Location:" . URL . "login/sendmail");
+	if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd!";
+		render("login/login");
+		exit();
+	}
+	else
+	{
+		if (isset($_POST['email'])){
+			$user = checkEmail($_POST['email']);
+			if (!empty($user)) {
+				header("Location:" . URL . "login/sendmail");
+			}
 		}
 	}
 
@@ -152,35 +190,67 @@ function sendNewPassword()
 
 function sendmail()
 {
-	render("login/sendmail");
+	if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd!";
+		render("login/login");
+		exit();
+	}
+	else
+	{
+		render("login/sendmail");
+	}
 }
 
 function profile($id)
 {
-	$profile = getUser($id);
-	render("login/profile", array(
-		'profile' => $profile
-	));
+	if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd!";
+		render("login/login");
+		exit();
+	}
+	else
+	{
+		$profile = getUser($id);
+		render("login/profile", array(
+			'profile' => $profile
+		));
+	}
 }
 
 function profileEdit($id)
 {
-	$profile = getUser($id);
-	render("login/profileEdit", array(
-		'profile' => $profile
-	));
+	if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd!";
+		render("login/login");
+		exit();
+	}
+	else
+	{
+		$profile = getUser($id);
+		render("login/profileEdit", array(
+			'profile' => $profile
+		));
+	}
 }
 
 function profileEditSave($id)
 {
-	// if fields are empty then go back to edit page
-	if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
-		echo "Vul alle velden in!";
-		profileEdit($id);
+	if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd!";
+		render("login/login");
+		exit();
 	}
-	// if fields are filled then call function and go back to profile page
-	else if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
-		editSaveProfile($_POST['id'], $_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email'], $_POST['is_admin']);
-		header("Location:" . URL . "login/profile/" . $_SESSION['userId']);
+	else
+	{
+		// if fields are empty then go back to edit page
+		if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
+			echo "Vul alle velden in!";
+			profileEdit($id);
+		}
+		// if fields are filled then call function and go back to profile page
+		else if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
+			editSaveProfile($_POST['id'], $_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email'], $_POST['is_admin']);
+			header("Location:" . URL . "login/profile/" . $_SESSION['userId']);
+		}
 	}
 }
