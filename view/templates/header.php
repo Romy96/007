@@ -15,7 +15,13 @@
 		?>
 		<li><i class="fa fa-user" aria-hidden="true"></i> Gebruiker: <?=$_SESSION['username']?> </li>
 		<li><a href="<?= URL ?>login/logOut"><i class="fa fa-sign-out" aria-hidden="true"></i> Uitloggen </a></li>
+		<?php
+		if($_SESSION['isAdmin'] == 1):
+		?>
 		<li><a href="<?= URL ?>backend/index"><i class="fa fa-server" aria-hidden="true"></i> Beheer </a></li>
+		<?php
+		endif;
+		?>
 		<li><a href="<?= URL ?>login/profile/<?= $_SESSION['userId'] ?>">Profiel</a></li>
 		<?php
 		; else:
