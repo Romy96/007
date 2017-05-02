@@ -13,6 +13,14 @@
 		<label for="lastname">Lastname:</label>
 		<input class="form-control" type="text" name="lastname" value="<?= $profile['lastname'];?>">
 	</div>
+		<div>
+		<label for="homeadress">Home adress:</label>
+		<input class="form-control" type="text" name="homeadress" value="<?=$profile['home_adress']?>">
+	</div>
+	<div>
+		<label for="zipcode">Zip code:</label>
+		<input class="form-control" type="text" name="zipcode" value="<?=$profile['zip_code']?>">
+	</div>
 	<div>
 		<label for="username">Username:</label>
 		<input class="form-control" type="text" name="username" value="<?= $profile['username'];?>">

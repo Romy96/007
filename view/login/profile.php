@@ -4,6 +4,10 @@ Voornaam: <?= $profile['firstname'];?>
 <br/>
 Achternaam: <?= $profile['prefix'] . " " . $profile['lastname'];?>
 <br/>
+Huisadres: <?= $profile['home_adress'];?>
+<br/>
+Postcode: <?= $profile['zip_code'];?>
+<br/>
 Gebruikersnaam: <?= $profile['username'];?>
 <br/>
 Email: <?= $profile['email'];?>

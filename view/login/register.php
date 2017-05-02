@@ -13,6 +13,14 @@
 		<input class="form-control"  type="text" name="lastname">
 	</div>
 	<div>
+		<label for="homeadress">Home adress:</label>
+		<input class="form-control" type="text" name="homeadress">
+	</div>
+	<div>
+		<label for="zipcode">Zip code:</label>
+		<input class="form-control" type="text" name="zipcode">
+	</div>
+	<div>
 		<label for="username">Username:</label>
 		<input class="form-control"  type="text" name="username">
 	</div>

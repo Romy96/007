@@ -2,7 +2,7 @@
 if(isset($user)):
 ?>
 <h1>Edit profile</h1>
-<form action="<?= URL ?>backend/profileSave" method="post">
+<form action="<?= URL ?>backend/profileSave/<?=$user['id']?>" method="post">
 	<div>
 		<label for="firstname">Firstname:</label>
 		<input type="hidden" name="id" value="<?=$user['id']?>">
@@ -15,6 +15,14 @@ if(isset($user)):
 	<div>
 		<label for="lastname">Lastname:</label>
 		<input class="form-control"  type="text" name="lastname" value="<?=$user['lastname']?>">
+	</div>
+	<div>
+		<label for="homeadress">Home adress:</label>
+		<input class="form-control" type="text" name="homeadress" value="<?=$user['home_adress']?>">
+	</div>
+	<div>
+		<label for="zipcode">Zip code:</label>
+		<input class="form-control" type="text" name="zipcode" value="<?=$user['zip_code']?>">
 	</div>
 	<div>
 		<label for="username">Username:</label>

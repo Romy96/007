@@ -70,15 +70,15 @@ function registerSave()
 	}
 	else 
 	{
-		if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
+		if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['homeadress']) || empty($_POST['zipcode']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
 			echo 'U heeft een veld niet ingevuld';
 			render("login/register");
 			exit();
 		}
 
 		// if fields are filled, call function
-		if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
-			createUser($_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email']);
+		if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['homeadress']) && isset($_POST['zipcode']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
+			createUser($_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['homeadress'], $_POST['zipcode'], $_POST['username'],  $_POST['password'], $_POST['email']);
 			header("Location:" . URL . "login/message");
 			exit();
 		}
@@ -243,13 +243,13 @@ function profileEditSave($id)
 	else
 	{
 		// if fields are empty then go back to edit page
-		if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
+		if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['homeadress']) || empty($_POST['zipcode']) || empty($_POST['username']) || empty($_POST['email'])) {
 			echo "Vul alle velden in!";
 			profileEdit($id);
 		}
 		// if fields are filled then call function and go back to profile page
-		else if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
-			editSaveProfile($_POST['id'], $_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email'], $_POST['is_admin']);
+		else if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['homeadress']) && isset($_POST['zipcode']) && isset($_POST['username']) && isset($_POST['email'])) {
+			editSaveProfile($_POST['id'], $_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['homeadress'], $_POST['zipcode'], $_POST['username'], $_POST['email'], $_POST['is_admin']);
 			header("Location:" . URL . "login/profile/" . $_SESSION['userId']);
 		}
 	}

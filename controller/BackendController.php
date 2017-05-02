@@ -243,19 +243,19 @@ function profileSave($id = '')
 
 	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
 	{
-		if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
+		if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['homeadress']) || empty($_POST['zipcode']) || empty($_POST['username'])  || empty($_POST['email'])) {
 			echo 'U heeft een veld niet ingevuld';
 			$user = getUser($id);
-			renderBackend("backend/profile", array(
+			renderBackend("backend/editProfile", array(
 				'user' => $user
 			));
 			exit();
 		}
 
 		// Als de waardes van de velden in het formulier bestaan, voer dan functie uit.
-		if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
+		if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['homeadress']) && isset($_POST['zipcode']) && isset($_POST['username'])  && isset($_POST['email'])) {
 			//die('stop');
-			saveProfile($id, $_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['email']);
+			saveProfile($id, $_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['homeadress'], $_POST['zipcode'], $_POST['username'], $_POST['email']);
 			$user = getUser($id);
 			renderBackend("backend/profile", array(
 				'user' => $user

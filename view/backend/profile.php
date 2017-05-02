@@ -13,6 +13,12 @@ if(isset($user)):
 		<label for="lastname">Lastname: <?=$user['lastname']?></label>
 	</div>
 	<div>
+		<label for="homeadress">Home adress: <?=$user['home_adress']?></label>
+	</div>
+	<div>
+		<label for="zipcode">Zip code: <?=$user['zip_code']?></label>
+	</div>
+	<div>
 		<label for="username">Username: <?=$user['username']?></label>
 	</div>
 	<div>
