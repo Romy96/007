@@ -12,7 +12,7 @@ function index()
 
 	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
 	{
-		echo "U bent wel ingelogd, maar u bent geen admin.";
+		echo "Verboden toegang!";
 		render("login/index");
 		exit;
 	}
@@ -34,7 +34,7 @@ function users()
 
 	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
 	{
-		echo "U bent wel ingelogd, maar u bent geen admin.";
+		echo "Verboden toegang!";
 		render("login/index");
 		exit;
 	}
@@ -69,7 +69,7 @@ function edit($id = '')
 
 	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
 	{
-		echo "U bent wel ingelogd, maar u bent geen admin.";
+		echo "Verboden toegang!";
 		render("login/index");
 		exit;
 	}
@@ -111,7 +111,7 @@ function editSave($id = '')
 
 	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
 	{
-		echo "U bent wel ingelogd, maar u bent geen admin.";
+		echo "Verboden toegang!";
 		render("login/index");
 		exit;
 	}
@@ -155,7 +155,7 @@ function profile($id = '')
 
 	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
 	{
-		echo "U bent wel ingelogd, maar u bent geen admin.";
+		echo "Verboden toegang!";
 		render("login/index");
 		exit;
 	}
@@ -195,7 +195,7 @@ function editProfile($id = '')
 
 	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
 	{
-		echo "U bent wel ingelogd, maar u bent geen admin.";
+		echo "Verboden toegang!";
 		render("login/index");
 		exit;
 	}
@@ -236,7 +236,7 @@ function profileSave($id = '')
 
 	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
 	{
-		echo "U bent wel ingelogd, maar u bent geen admin.";
+		echo "Verboden toegang!";
 		render("login/index");
 		exit;
 	}
