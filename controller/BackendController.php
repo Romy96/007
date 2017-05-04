@@ -85,10 +85,20 @@ function edit($id = '')
 			echo ('Geen resultaat');
 		}
 
+		//Roep functie op met id in het variable
+		$roles = getAllRoles();
+
+
+		//Als het leeg geef, dan geef het alleen deze zin weer.
+		if(empty($roles)) {
+			echo ('Geen resultaat');
+		}
+
 		//Als id bestaan, geef dan formulier weer.
 		if (isset($id)) {
 			renderBackend("backend/edit", array(
 				'user' => $user,
+				'roles' => $roles
 			));
 		}
 		else 
@@ -118,7 +128,7 @@ function editSave($id = '')
 
 	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
 	{
-		if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email'])) {
+		if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email']) || empty($_POST['roles'])) {
 			echo 'U heeft een veld niet ingevuld';
 			$user = getUser($id);
 			renderBackend("backend/edit", array(
@@ -127,9 +137,9 @@ function editSave($id = '')
 		}
 
 		// Als de waardes van de velden in het formulier bestaan, voer dan functie uit.
-		if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
+		if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['roles'])) {
 			//die('stop');
-			editUser($id, $_POST['username'], $_POST['password'], $_POST['email']);
+			editUser($id, $_POST['username'], $_POST['password'], $_POST['email'] , $_POST['roles']);
 			header("Location:" . URL . "backend/users");
 			exit();
 		}
@@ -214,13 +224,13 @@ function editProfile($id = '')
 		//Als id bestaan, geef dan formulier weer.
 		if (isset($id)) {
 			renderBackend("backend/editProfile", array(
-				'user' => $user,
+				'user' => $user
 			));
 		}
 		else 
 		{
 			renderBackend("backend/profile", array(
-				'user' => $user,
+				'user' => $user
 			));
 		}
 	}

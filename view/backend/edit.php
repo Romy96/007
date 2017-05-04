@@ -23,6 +23,18 @@ if(isset($user)):
 		</div>
 	</div>
 	<div>
+		<label for="roles">Roles:</label>
+		<?php
+			foreach ($roles as $row):
+		?>
+        <div class="checkbox">
+            <input type="checkbox" name="roles"><?=$row['name']?>
+        </div>
+		<?php
+		endforeach;
+		?>
+	</div>
+	<div>
 		<input type="submit" value="Send">
 	</div>
 <?php

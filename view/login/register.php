@@ -38,8 +38,6 @@
 		<input class="form-control" type="email" name="email">
 		</div>
 	</div>
-		<label for="isAdmin">Will this be an admin account?</label>
-		<label class="checkbox-inline"><input type="checkbox" id="yes" name="yes" value="1">Yes</label>
 	<div>
 		<input type="submit" value="Send">
 	</div>

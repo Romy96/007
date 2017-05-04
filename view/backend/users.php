@@ -12,10 +12,11 @@
                         <tr>
                             <th>Voornaam</th>
                             <th>Achternaam</th>
+                            <th>Woonadres</th>
+                            <th>Postcode</th>
                             <th>Gebruikersnaam</th>
                             <th>Wachtwoord</th>
                             <th>Emailadres</th>
-                            <th>Admin? (0 is nee, 1 is ja)</th>
                             <th data-sortable="false">Acties</th>
                         </tr>
                         </thead>
@@ -33,6 +34,12 @@
                                     	<?=$row['prefix']?> <?=$row['lastname']?>
                                     </td>
                                     <td>
+                                        <?=$row['home_adress']?>
+                                    </td>
+                                    <td>
+                                        <?=$row['zip_code']?>
+                                    </td>
+                                    <td>
 										<?=$row['username']?>
                                     </td>
                                     <td>
@@ -40,9 +47,6 @@
                                     </td>
                                     <td>
 										<?=$row['email']?>
-                                    </td>
-                                    <td>
-										<?=$row['is_admin']?>
                                     </td>
                                     <td>
                                         <div class="btn-group">
