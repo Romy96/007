@@ -168,37 +168,12 @@ function forgot()
 
 function sendNewPassword()
 {
-	if ( IsLoggedInSession()==false ) {
-		echo "U heeft nog niet ingelogd!";
-		render("login/login");
-		exit();
-	}
-	else
-	{
-		if (isset($_POST['email'])){
-			$user = checkEmail($_POST['email']);
-			if (!empty($user)) {
-				header("Location:" . URL . "login/sendmail");
-			}
-		}
-	}
-
-	echo "Hurray!!!";
-
-	// header incomming!!!!
+	
 }
 
 function sendmail()
 {
-	if ( IsLoggedInSession()==false ) {
-		echo "U heeft nog niet ingelogd!";
-		render("login/login");
-		exit();
-	}
-	else
-	{
-		render("login/sendmail");
-	}
+	
 }
 
 function profile($id)
