@@ -31,5 +31,6 @@
 		<?php
 		endif;
 		?>
+		<li><a href="<?= URL ?>login/contact"><i class="fa fa-file-text-o" aria-hidden="true"></i> Contact </a></li>
 	</ul>
 	</nav>

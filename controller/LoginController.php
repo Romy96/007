@@ -166,14 +166,9 @@ function forgot()
 	}
 }
 
-function sendNewPassword()
+function contact()
 {
-	
-}
-
-function sendmail()
-{
-	
+	render("login/contact");
 }
 
 function profile($id)
