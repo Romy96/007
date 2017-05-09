@@ -94,6 +94,13 @@ function edit($id = '')
 			echo ('Geen resultaat');
 		}
 
+		// get roles for single user
+		$user_roles = GetRolesIdsForUserId($id);
+
+		if(empty($user_roles)) {
+			echo ('Geen resultaat');
+		}
+
 		//Als id bestaan, geef dan formulier weer.
 		if (isset($id)) {
 			renderBackend("backend/edit", array(

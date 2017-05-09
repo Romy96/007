@@ -47,37 +47,44 @@ function loginUser($username = null, $password = null)
 
     $result1 = $db->prepare("SELECT * FROM login WHERE username = '$username' AND  password = '$password'");
  	$result1->execute();
- 	$row = $result1->fetch(PDO::FETCH_ASSOC);
+ 	$row1 = $result1->fetch(PDO::FETCH_ASSOC);
  	$rowCount  = $result1->rowCount();
 
- 	$login_id = $row['id'];
-
- 	$result2 = $db->prepare("SELECT role_id FROM login_role WHERE login_id=:loginid");
- 	$result2->execute(array(
- 		':loginid' => $login_id
- 		));
- 	$row2 = $result2->fetch(PDO::FETCH_ASSOC);
-
- 	$role_id = $row2['role_id'];
-
- 	$result3 = $db->prepare("SELECT name FROM roles WHERE id=:id");
- 	$result3->execute(array(
- 		':id' => $role_id
- 		));
- 	$row3 = $result3->fetch(PDO::FETCH_ASSOC);
+ 	$login_id = $row1['id'];
 
     if($rowCount == 1 )
 	{
-		$_SESSION['userId'] = $row['id'];
+		$_SESSION['userId'] = $row1['id'];
 		$_SESSION['logged in'] = true;
 		$_SESSION['username'] = $username;
-		$_SESSION['userRole'] = $row3['name'];
+
+		$result2 = $db->prepare("SELECT role_id FROM login_role WHERE login_id=:loginid");
+ 		$result2->execute(array(
+ 		':loginid' => $login_id
+ 		));
+ 		$rows = $result2->fetchAll();
+
+ 		foreach($rows as $row) {
+			$role_id = $row['role_id'];
+
+			$sql3 = "SELECT name FROM roles WHERE id = :roleid";
+			$query3 = $db->prepare($sql3);
+			$query3->execute(array(
+				":roleid" => $role_id
+			));
+			$rolename = $query3->fetch(PDO::FETCH_ASSOC);
+			$_SESSION['roles'][] = $rolename['name'];
+		}
+
 		$db = null;
 		return true;
 	}
 
 	else
 	{
+		$_SESSION['userid'] = null; 
+		$_SESSION['username'] = null; 
+		$_SESSION['roles'] = [];
 		$db = null;
 		return false;
 	}
@@ -94,11 +101,11 @@ function IsLoggedInSession() {
 }
 
 function IsAdmin() {
-	return ($_SESSION['userRole'] == "Admin");
+	return (!empty($_SESSION['roles']) && $_SESSION['roles'] == "Admin");
 }
 
 function IsCustomer() {
-	return ($_SESSION['userRole'] == "Customer");
+	return (!empty($_SESSION['roles']) && $_SESSION['roles'] == "Customer");
 }
 
 function getUser($id) 
@@ -120,13 +127,38 @@ function getAllRoles()
 {
 	$db = openDatabaseConnection();
 
-	$sql = "SELECT name FROM roles";
+	$sql = "SELECT * FROM roles";
 	$query = $db->prepare($sql);
 	$query->execute();
 
 	$db = null;
 
 	return $query->fetchAll();	
+}
+
+function GetAllRolesWithChecksForUserId($id) {
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT roles.* , login_role.* FROM roles LEFT JOIN login_role ON roles.id = login_role.role_id AND login_role.login_id = :id order by roles.id ";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		":id" => $id
+		));
+
+	$db = null;
+	return $query->fetchAll();
+}
+function GetRolesIdsForUserId($id) {
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT role_id FROM login_role WHERE login_id = :id ";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		":id" => $id
+		));
+
+	$db = null;
+	return $query->fetchAll();
 }
 
 
@@ -198,11 +230,9 @@ function editUser($id = null, $username = null, $password = null, $email = null,
 	//Bewerkt de patient als alles op orde loopt.
 	$db = openDatabaseConnection();
 
-	$sql = "SELECT * FROM roles WHERE name=:name";
+	$sql = "SELECT * FROM roles";
 	$query = $db->prepare($sql);
-	$query->execute(array(
-		':name' => $role
-		));
+	$query->execute();
 	$row = $query->fetch(PDO::FETCH_ASSOC);
 
 	$sql2 = "UPDATE login SET username=:username, password=:password, email=:email WHERE id=:id";

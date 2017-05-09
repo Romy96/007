@@ -28,7 +28,7 @@ if(isset($user)):
 			foreach ($roles as $row):
 		?>
         <div class="checkbox">
-            <input type="checkbox" name="roles"><?=$row['name']?>
+            <input type="checkbox" name="roles[]" value="<?=$row['id']?>"><?=$row['name']?>
         </div>
 		<?php
 		endforeach;
