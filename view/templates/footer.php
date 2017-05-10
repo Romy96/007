@@ -6,7 +6,7 @@
 	echo 'session username: ' . (isset($_SESSION['username'])?$_SESSION['username']:'(undefined)') . '<br>'; 
 	if (isset($_SESSION['roles'])) {
 		foreach($_SESSION['roles'] as $role) {
-			echo 'session role: ' . $role . '<br>';
+			echo 'session role: ' . $role . '<br />';
 		}
 	}
 	else

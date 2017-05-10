@@ -62,18 +62,20 @@ function loginUser($username = null, $password = null)
  		$result2->execute(array(
  		':loginid' => $login_id
  		));
- 		$rows = $result2->fetchAll();
+ 		$roles = $result2->fetchAll();
 
- 		foreach($rows as $row) {
-			$role_id = $row['role_id'];
+ 		if(isset($roles)) {
+	 		foreach($roles as $row) {
+				$role_id = $row['role_id'];
 
-			$sql3 = "SELECT name FROM roles WHERE id = :roleid";
-			$query3 = $db->prepare($sql3);
-			$query3->execute(array(
-				":roleid" => $role_id
-			));
-			$rolename = $query3->fetch(PDO::FETCH_ASSOC);
-			$_SESSION['roles'][] = $rolename['name'];
+				$sql3 = "SELECT name FROM roles WHERE id = :roleid";
+				$query3 = $db->prepare($sql3);
+				$query3->execute(array(
+					":roleid" => $role_id
+				));
+				$rolename = $query3->fetchAll();
+				$_SESSION['roles'][] = $rolename['name'];
+			}
 		}
 
 		$db = null;
@@ -108,6 +110,14 @@ function IsCustomer() {
 	return (!empty($_SESSION['roles']) && $_SESSION['roles'] == "Customer");
 }
 
+function CanEdit() {
+	return(!empty($_SESSION['permissions']) && $_SESSION['permissions'] == "Edit");
+}
+
+function CanDelete() {
+	return(!empty($_SESSION['permissions']) && $_SESSION['permissions'] == "Delete");
+}
+
 function getUser($id) 
 {
 	$db = openDatabaseConnection();
@@ -134,6 +144,19 @@ function getAllRoles()
 	$db = null;
 
 	return $query->fetchAll();	
+}
+
+function getAllPermissions() 
+{
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT * FROM permissions";
+	$query = $db->prepare($sql);
+	$query->execute();
+
+	$db = null;
+
+	return $query->fetchAll();
 }
 
 function GetAllRolesWithChecksForUserId($id) {
@@ -224,16 +247,12 @@ function editUser($id = null, $username = null, $password = null, $email = null,
 	$password = isset($_POST['password']) ? $_POST['password'] : null;
 	$hash = md5($password);
 	$email = isset($_POST['email']) ? $_POST['email'] : null;
-	$role = isset($_POST['roles']) ? $_POST['roles'] : null;
+	$role_ids_to_add = isset($_POST['roles']) ? $_POST['roles'] : null;
 	$userid = isset($_POST['id']) ? $_POST['id'] : null;
 
 	//Bewerkt de patient als alles op orde loopt.
 	$db = openDatabaseConnection();
 
-	$sql = "SELECT * FROM roles";
-	$query = $db->prepare($sql);
-	$query->execute();
-	$row = $query->fetch(PDO::FETCH_ASSOC);
 
 	$sql2 = "UPDATE login SET username=:username, password=:password, email=:email WHERE id=:id";
 	$query2 = $db->prepare($sql2);
@@ -244,15 +263,21 @@ function editUser($id = null, $username = null, $password = null, $email = null,
 		':id' => $userid
 		));
 
-	$role_id = $row['id'];
 
+	$sql = "DELETE FROM login_role WHERE login_id = :id ";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		":id" => $user_id
+		));
 
+	foreach ($role_ids_to_add as $role_id) {
 	$sql3 = "INSERT INTO login_role (login_id, role_id) VALUES (:id, :roleid)";
 	$query3 = $db->prepare($sql3);
 	$query3->execute(array(
 		':id' => $userid,
 		':roleid' => $role_id
 		));
+	}
 
 	$db = null;
 }

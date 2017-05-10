@@ -74,7 +74,7 @@ function edit($id = '')
 		exit;
 	}
 
-	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true)
 	{
 		//Roep functie op met id in het variable
 		$user = getUser($id);
@@ -86,18 +86,11 @@ function edit($id = '')
 		}
 
 		//Roep functie op met id in het variable
-		$roles = getAllRoles();
+		$roles = GetAllRolesWithChecksForUserId($id);
 
 
 		//Als het leeg geef, dan geef het alleen deze zin weer.
 		if(empty($roles)) {
-			echo ('Geen resultaat');
-		}
-
-		// get roles for single user
-		$user_roles = GetRolesIdsForUserId($id);
-
-		if(empty($user_roles)) {
 			echo ('Geen resultaat');
 		}
 
@@ -133,7 +126,7 @@ function editSave($id = '')
 		exit;
 	}
 
-	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true)
 	{
 		if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email']) || empty($_POST['roles'])) {
 			echo 'U heeft een veld niet ingevuld';
