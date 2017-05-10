@@ -249,7 +249,7 @@ function profileEditSave($id)
 		}
 		// if fields are filled then call function and go back to profile page
 		else if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['homeadress']) && isset($_POST['zipcode']) && isset($_POST['username']) && isset($_POST['email'])) {
-			editSaveProfile($_POST['id'], $_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['homeadress'], $_POST['zipcode'], $_POST['username'], $_POST['email'], $_POST['is_admin']);
+			editSaveProfile($_POST['id'], $_POST['firstname'], $_POST['prefix'], $_POST['lastname'], $_POST['homeadress'], $_POST['zipcode'], $_POST['username'], $_POST['email']);
 			header("Location:" . URL . "login/profile/" . $_SESSION['userId']);
 		}
 	}

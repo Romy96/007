@@ -313,12 +313,12 @@ function saveProfile($id = null, $firstname = null, $prefix = null, $lastname = 
 	$db = null;
 }
 
-function editSaveProfile($id, $firstname, $prefix, $lastname, $home_adress, $zip_code, $username, $email, $is_admin)
+function editSaveProfile($id, $firstname, $prefix, $lastname, $home_adress, $zip_code, $username, $email)
 {
 	// create database connection
 	$db = openDatabaseConnection();
 	// prepare query and execute
-	$sql = "UPDATE login SET firstname=:firstname, prefix=:prefix, lastname=:lastname, home_adress=:home_adress, zip_code=:zip_code, username=:username,  email=:email, is_admin=:is_admin WHERE id=:id";
+	$sql = "UPDATE login SET firstname=:firstname, prefix=:prefix, lastname=:lastname, home_adress=:home_adress, zip_code=:zip_code, username=:username,  email=:email WHERE id=:id";
 		$query = $db->prepare($sql);
 		$query->execute(array(
 		':id' => $id,
@@ -328,8 +328,7 @@ function editSaveProfile($id, $firstname, $prefix, $lastname, $home_adress, $zip
 		':home_adress' => $home_adress,
 		':zip_code' => $zip_code,
 		':username' => $username,
-		':email' => $email,
-		':is_admin' => $is_admin
+		':email' => $email
 	));
 	// close connection
 	$db = NULL;
