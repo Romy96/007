@@ -110,14 +110,6 @@ function IsCustomer() {
 	return (!empty($_SESSION['roles']) && $_SESSION['roles'] == "Customer");
 }
 
-function CanEdit() {
-	return(!empty($_SESSION['permissions']) && $_SESSION['permissions'] == "Edit");
-}
-
-function CanDelete() {
-	return(!empty($_SESSION['permissions']) && $_SESSION['permissions'] == "Delete");
-}
-
 function getUser($id) 
 {
 	$db = openDatabaseConnection();
@@ -263,12 +255,11 @@ function editUser($id = null, $username = null, $password = null, $email = null,
 		':id' => $userid
 		));
 
-
 	$sql = "DELETE FROM login_role WHERE login_id = :id ";
 	$query = $db->prepare($sql);
 	$query->execute(array(
-		":id" => $user_id
-		));
+		":id" => $userid
+	));
 
 	foreach ($role_ids_to_add as $role_id) {
 	$sql3 = "INSERT INTO login_role (login_id, role_id) VALUES (:id, :roleid)";
