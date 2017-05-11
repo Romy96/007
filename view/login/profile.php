@@ -1,7 +1,5 @@
 <h1>Profiel</h1>
 <p>
-Avatar: <?= $profile['image'];?>
-<br />
 Voornaam: <?= $profile['firstname'];?>
 <br/>
 Achternaam: <?= $profile['prefix'] . " " . $profile['lastname'];?>
