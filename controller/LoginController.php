@@ -171,6 +171,11 @@ function contact()
 	render("login/contact");
 }
 
+function maill()
+{
+	render("login/mail");
+}
+
 function profile($id)
 {
 	if ( IsLoggedInSession()==false ) {

@@ -173,11 +173,6 @@ function checkEmail($email)
 	return $user;
 }
 
-function sendEmail()
-{
-	
-}
-
 function LogOut() {
 	echo "Logged out";
 	header("location: ". URL ."login/login");
