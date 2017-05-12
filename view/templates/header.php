@@ -17,7 +17,7 @@
 		<li><a href="<?= URL ?>login/logOut"><i class="fa fa-sign-out" aria-hidden="true"></i> Uitloggen </a></li>
 		<?php
 		if (isset($_SESSION['roles'])): 
-			if ($_SESSION['roles'] == "Admin"):
+			if ($_SESSION['roles'] = "Admin"):
 		?>
 		<li><a href="<?= URL ?>backend/index"><i class="fa fa-server" aria-hidden="true"></i> Beheer </a></li>
 		<?php
