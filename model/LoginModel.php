@@ -82,8 +82,6 @@ function loginUser($username = null, $password = null)
  				));
  				$permissions = $result3->fetchAll();
 
- 				var_dump($rolename);
-
  				if(isset($permissions)) {
  					foreach ($permissions as $permission) {
 	 					$permission_id = $permission['permission_id'];
@@ -97,8 +95,6 @@ function loginUser($username = null, $password = null)
 						$_SESSION['permissions'][] = $displayname[0]['displayname'];
  					}
  				}
-
- 				var_dump($displayname);
 			}
 		}
 
