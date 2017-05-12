@@ -13,7 +13,7 @@
 	}
 	else
 	{
-		echo 'session role: (undefined)';
+		echo 'session role: (undefined) <br />';
 	}
 	if (isset($_SESSION['permissions'])) {
 		if (is_array($_SESSION['permissions']) || is_object($_SESSION['permissions'])) {
@@ -24,7 +24,7 @@
 	}
 	else
 	{
-		echo 'session permission: (undefined)';
+		echo 'session permission: (undefined) <br />';
 	}
 ?>
 </div>
