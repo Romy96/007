@@ -47,14 +47,14 @@ function loginUser($username = null, $password = null)
 
     $result1 = $db->prepare("SELECT * FROM login WHERE username = '$username' AND  password = '$password'");
  	$result1->execute();
- 	$row1 = $result1->fetch(PDO::FETCH_ASSOC);
+ 	$row = $result1->fetch(PDO::FETCH_ASSOC);
  	$rowCount  = $result1->rowCount();
 
- 	$login_id = $row1['id'];
+ 	$login_id = $row['id'];
 
     if($rowCount == 1 )
 	{
-		$_SESSION['userId'] = $row1['id'];
+		$_SESSION['userId'] = $row['id'];
 		$_SESSION['logged in'] = true;
 		$_SESSION['username'] = $username;
 
@@ -74,7 +74,31 @@ function loginUser($username = null, $password = null)
 					":roleid" => $role_id
 				));
 				$rolename = $query3->fetchAll();
-				$_SESSION['roles'][] = $rolename['name'];
+				$_SESSION['roles'][] = $rolename[0]['name'];
+
+				$result3 = $db->prepare("SELECT permission_id FROM permission_role WHERE role_id=:roleid");
+ 				$result3->execute(array(
+ 				':roleid' => $role_id
+ 				));
+ 				$permissions = $result3->fetchAll();
+
+ 				var_dump($rolename);
+
+ 				if(isset($permissions)) {
+ 					foreach ($permissions as $permission) {
+	 					$permission_id = $permission['permission_id'];
+
+						$sql4 = "SELECT displayname FROM permissions WHERE id = :permissionid";
+						$query4 = $db->prepare($sql4);
+						$query4->execute(array(
+							":permissionid" => $permission_id
+						));
+						$displayname = $query4->fetchAll();
+						$_SESSION['permissions'][] = $displayname[0]['displayname'];
+ 					}
+ 				}
+
+ 				var_dump($displayname);
 			}
 		}
 
@@ -87,6 +111,7 @@ function loginUser($username = null, $password = null)
 		$_SESSION['userid'] = null; 
 		$_SESSION['username'] = null; 
 		$_SESSION['roles'] = [];
+		$_SESSION['permissions'] = [];
 		$db = null;
 		return false;
 	}
@@ -109,6 +134,18 @@ function IsAdmin() {
 function IsCustomer() {
 	return (!empty($_SESSION['roles']) && $_SESSION['roles'] == "Customer");
 }
+
+function CanEditUser() {
+	return (!empty($_SESSION['permissions']) && $_SESSION['permissions'] = "Edit user");
+}
+
+function CanDeleteUser() {
+	return (!empty($_SESSION['permissions']) && $_SESSION['permissions'] = "Delete user");
+}
+
+function CanEditTheirOwnProfile() {
+	return (!empty($_SESSION['permissions']) && $_SESSION['permissions'] = "Edit their own profile");
+} 
 
 function getUser($id) 
 {

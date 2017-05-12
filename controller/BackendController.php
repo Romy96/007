@@ -74,8 +74,16 @@ function edit($id = '')
 		exit;
 	}
 
-	elseif ( IsLoggedInSession()==true && IsAdmin() == true)
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true && CanEditUser() == false)
 	{
+		echo 'U heeft daar geen recht op!';
+		renderBackend("backend/users", array(
+			'users' => getAllUsers()
+		));
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true && CanEditUser() == true)
+	{ 
 		//Roep functie op met id in het variable
 		$user = getUser($id);
 
@@ -126,8 +134,16 @@ function editSave($id = '')
 		exit;
 	}
 
-	elseif ( IsLoggedInSession()==true && IsAdmin() == true)
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true && CanEditUser() == false)
 	{
+		echo 'U heeft daar geen recht op!';
+		renderBackend("backend/users", array(
+			'users' => getAllUsers()
+		));
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true && CanEditUser() == true)
+	{ 
 		if (empty($_POST['username']) || empty($_POST['password']) || empty($_POST['email']) || empty($_POST['roles'])) {
 			echo 'U heeft een veld niet ingevuld';
 			$user = getUser($id);
@@ -170,8 +186,15 @@ function profile($id = '')
 		exit;
 	}
 
-	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true && CanEditTheirOwnProfile() == false)
 	{
+		echo 'U heeft daar geen recht op!';
+		renderBackend("backend/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true && CanEditTheirOwnProfile() == true)
+	{ 
 		//Roep functie op met id in het variable
 		$user = getUser($id);
 
@@ -203,15 +226,15 @@ function editProfile($id = '')
 	exit;
 	}
 
-	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true && CanEditTheirOwnProfile() == false)
 	{
-		echo "Verboden toegang!";
-		render("login/index");
+		echo 'U heeft daar geen recht op!';
+		renderBackend("backend/index");
 		exit;
 	}
 
-	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
-	{
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true && CanEditTheirOwnProfile() == true)
+	{ 
 		//Roep functie op met id in het variable
 		$user = getUser($id);
 
@@ -251,8 +274,15 @@ function profileSave($id = '')
 		exit;
 	}
 
-	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true && CanEditTheirOwnProfile() == false)
 	{
+		echo 'U heeft daar geen recht op!';
+		renderBackend("backend/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true && CanEditTheirOwnProfile() == true)
+	{ 
 		if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['homeadress']) || empty($_POST['zipcode']) || empty($_POST['username'])  || empty($_POST['email'])) {
 			echo 'U heeft een veld niet ingevuld';
 			$user = getUser($id);

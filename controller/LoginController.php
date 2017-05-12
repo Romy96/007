@@ -208,7 +208,13 @@ function profile($id)
 		render("login/login");
 		exit();
 	}
-	else
+	elseif ( IsLoggedInSession()==true && CanEditTheirOwnProfile() == false)
+	{
+		echo 'U heeft daar geen recht op!';
+		render("login/index");
+		exit();
+	}
+	elseif ( IsLoggedInSession()==true && CanEditTheirOwnProfile() == true)
 	{
 		$profile = getUser($id);
 		render("login/profile", array(
@@ -224,7 +230,13 @@ function profileEdit($id)
 		render("login/login");
 		exit();
 	}
-	else
+	elseif ( IsLoggedInSession()==true && CanEditTheirOwnProfile() == false)
+	{
+		echo 'U heeft daar geen recht op!';
+		render("login/index");
+		exit();
+	}
+	elseif ( IsLoggedInSession()==true && CanEditTheirOwnProfile() == true)
 	{
 		$profile = getUser($id);
 		render("login/profileEdit", array(
@@ -240,7 +252,13 @@ function profileEditSave($id)
 		render("login/login");
 		exit();
 	}
-	else
+	elseif ( IsLoggedInSession()==true && CanEditTheirOwnProfile() == false)
+	{
+		echo 'U heeft daar geen recht op!';
+		render("login/index");
+		exit();
+	}
+	elseif ( IsLoggedInSession()==true && CanEditTheirOwnProfile() == true)
 	{
 		// if fields are empty then go back to edit page
 		if (empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['homeadress']) || empty($_POST['zipcode']) || empty($_POST['username']) || empty($_POST['email'])) {
