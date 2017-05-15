@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Gegenereerd op: 12 mei 2017 om 10:00
+-- Gegenereerd op: 15 mei 2017 om 11:23
 -- Serverversie: 5.6.17
 -- PHP-versie: 5.5.12
 
@@ -117,6 +117,31 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (2, 1),
 (3, 1),
 (3, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `products`
+--
+
+CREATE TABLE IF NOT EXISTS `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product` varchar(100) DEFAULT NULL,
+  `price` varchar(10) DEFAULT NULL,
+  `category` varchar(50) DEFAULT NULL,
+  `description` text,
+  `amount` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `products`
+--
+
+INSERT INTO `products` (`id`, `product`, `price`, `category`, `description`, `amount`) VALUES
+(1, 'MicroMemory 8GB, DDR3 8GB DDR3 1333MHz ECC geheugenmodule', '58,69', 'ram-geheugen', 'Intern geheugen: 8 GB\r\nIntern geheugentype: DDR3\r\nGeheugenlayout (modules x formaat): 1 x 8 GB\r\nKloksnelheid geheugen: 1333 Megahertz\r\nECC: ECC ja', '150'),
+(2, 'MSI 970 GAMING - Moederbord', '99,90', 'moederbord', 'Heeft 6 SATA 600-poorten met RAID-ondersteuning.\r\nMet één druk op de knop overklokken dankzij OC Genie 4.\r\nBeschikt over Killer E2200 netwerk-chip, spelen zonder lag.\r\nVeel USB-poorten voor het aansluiten van randapparatuur.\r\nOndersteunt AMD CrossfireX en NVIDIA SLI. Heeft ruimte voor 2 videokaarten.\r\nDit moederbord beschikt niet over wifi en bluetooth.\r\nOndersteunt alleen processors tot maximaal 200 TDP', '50'),
+(3, 'Western Digital externe harde schijf: My Book Thunderbolt Duo 6TB - Zwart, Zilver', '295', 'hard drive', '6000 GB opslagcapaciteit harde schijf\r\n5200 RPM rotatiesnelheid harde schijf\r\n3.5 " harde schijf, omvang', '250');
 
 -- --------------------------------------------------------
 
