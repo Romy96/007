@@ -4,6 +4,8 @@ require(ROOT . "model/LoginModel.php");
 
 function index()
 {
+	if (IsLoggedInSession()==true && IsAdmin() == false) 
+	{
 		$user = getAllUsers();
 
 		if(empty($user)) 
@@ -18,6 +20,11 @@ function index()
 				'user' => $user
 			));
 		}
+	}
+	elseif (IsLoggedInSession()==true && IsAdmin() == true)
+	{
+		renderBackend("backend/index");
+	}
 }
 
 function login()
