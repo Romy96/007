@@ -13,7 +13,6 @@
 		<?php
 		if(isset($_SESSION['userId'])):
 		?>
-		<li><i class="fa fa-user" aria-hidden="true"></i> Gebruiker: <?=$_SESSION['username']?> </li>
 		<li><a href="<?= URL ?>login/logOut"><i class="fa fa-sign-out" aria-hidden="true"></i> Uitloggen </a></li>
 		<?php
 		if (isset($_SESSION['roles'])): 
@@ -24,7 +23,8 @@
 			endif;
 		endif;
 		?>
-		<li><a href="<?= URL ?>login/profile/<?= $_SESSION['userId'] ?>">Profiel</a></li>
+		<li><a href="<?= URL ?>login/profile/<?= $_SESSION['userId'] ?>"><i class="fa fa-user-secret" aria-hidden="true"></i>Profiel</a></li>
+		<li><a href="<?= URL ?>login/products"><i class="fa fa-laptop" aria-hidden="true"></i> Producten </a></li>
 		<?php
 		; else:
 		?>
