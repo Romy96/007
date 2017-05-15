@@ -314,5 +314,45 @@ function profileSave($id = '')
 	}
 }
 
+function products()
+{
+	if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{	
+		$products = AllProducts();
+
+		//Als het leeg geef, dan geef het alleen deze zin weer.
+		if(empty($products)) {
+			echo ('Geen resultaat');
+			renderBackend("backend/index");
+			exit;
+		}
+
+		//Als id bestaan, geef dan formulier weer.
+		if (isset($products)) {
+			renderBackend("backend/products", array(
+				'products' => $products
+			));
+		}
+		else 
+		{
+			//Zoniet, dan terug naar het tabel.
+			renderBackend("backend/index");
+		}
+	}
+}
+
 
 

@@ -358,3 +358,16 @@ function editSaveProfile($id, $firstname, $prefix, $lastname, $home_adress, $zip
 	$db = NULL;
 }
 
+function AllProducts() 
+{
+	// create database connection
+	$db = openDatabaseConnection();
+	// prepare query and execute
+	$sql = "SELECT * FROM products";
+	$query = $db->prepare($sql);
+	$query->execute();
+
+	$db = null;
+
+	return $query->fetchAll();
+}
