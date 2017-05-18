@@ -171,7 +171,7 @@ function contact()
 	render("login/contact");
 }
 
-function maill()
+function email()
 {
 	render("login/mail");
 }

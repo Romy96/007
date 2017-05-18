@@ -1,7 +1,7 @@
 <h3>Maak een afspraak of stel een vraag.</h3>
 
 <br></br>
-<form name="contactform" method="post" action="<?= URL ?>login/maill">                       
+<form name="contactform" method="post" action="<?= URL ?>login/email">
     <div class="form-group col-xs-12 floating-label-form-group controls"> <i class="fa fa-user"></i>
         <label for="first_name">Voornaam *</label>
     </div>
