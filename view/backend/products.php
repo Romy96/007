@@ -38,7 +38,10 @@
                                         <?=$row['description']?>
                                     </td>
                                     <td>
-										<?=$row['amount']?>
+                                        <?=$row['amount']?>
+                                    </td>
+                                    <td>
+										<img style="max-width:200px;max-height:200px;" src="<?=$row['image']?>" alt="plaatje">
                                     </td>
                                     <td>
                                         <div class="btn-group">
