@@ -371,3 +371,17 @@ function AllProducts()
 
 	return $query->fetchAll();
 }
+
+function SortProductsByCategory()
+{
+	// create database connection
+	$db = openDatabaseConnection();
+	// prepare query and execute
+	$sql = "SELECT * FROM products ORDER BY category";
+	$query = $db->prepare($sql);
+	$query->execute();
+
+	$db = null;
+
+	return $query->fetchAll();
+}

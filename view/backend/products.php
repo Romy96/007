@@ -12,7 +12,7 @@
                         <tr>
                             <th>Product</th>
                             <th>Prijs</th>
-                            <th>Categorie</th>
+                            <th><a href="<?=URL?>backend/products/SortProductByCategory">Categorie</a></th>
                             <th>Beschrijving</th>
                             <th>Aantal</th>
                             <th data-sortable="false">Acties</th>
@@ -35,7 +35,7 @@
                                         <?=$row['category']?>
                                     </td>
                                     <td>
-                                        <?=$row['description']?>
+                                       <?=$row['description']?>
                                     </td>
                                     <td>
 										<?=$row['amount']?>

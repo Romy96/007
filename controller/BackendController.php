@@ -351,6 +351,25 @@ function products()
 			//Zoniet, dan terug naar het tabel.
 			renderBackend("backend/index");
 		}
+	
+
+		//Als id bestaan, geef dan formulier weer.
+		if (isset($_GET['SortProductByCategory'] )) {
+			SortProductByCategory();
+			if (isset($products)) {
+				renderBackend("backend/products", array(
+					'products' => $products
+				));
+			}
+		}
+		else 
+		{
+			//Zoniet, dan terug naar het tabel.
+			renderBackend("backend/products", array(
+				'products' => $products
+			));
+		}
+
 	}
 }
 
