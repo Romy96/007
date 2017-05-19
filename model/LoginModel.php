@@ -124,7 +124,7 @@ function IsLoggedInSession() {
 }
 
 function IsAdmin() {
-	return (!empty($_SESSION['roles']) && $_SESSION['roles'] = "Admin");
+	return (!empty($_SESSION['roles']) && $_SESSION['roles'] == "Admin");
 }
 
 function IsCustomer() {
