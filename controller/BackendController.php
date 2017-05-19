@@ -10,14 +10,14 @@ function index()
 	exit;
 	}
 
-	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	elseif ( IsLoggedInSession()==true && IsCustomer()==true)
 	{
-		echo "Verboden toegang!";
+		echo 'Verboder toegang!';
 		render("login/index");
 		exit;
 	}
 
-	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	elseif ( IsLoggedInSession()==true && IsAdmin()==true)
 	{
 		renderBackend("backend/index");
 	}
