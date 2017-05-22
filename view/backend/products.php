@@ -15,6 +15,7 @@
                             <th><a href="<?=URL?>backend/products/SortProductByCategory">Categorie</a></th>
                             <th>Beschrijving</th>
                             <th>Aantal</th>
+                            <th>Afbeelding</th>
                             <th data-sortable="false">Acties</th>
                         </tr>
                         </thead>

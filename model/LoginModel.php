@@ -124,11 +124,11 @@ function IsLoggedInSession() {
 }
 
 function IsAdmin() {
-	return (!empty($_SESSION['roles']) && $_SESSION['roles'] == "Admin");
+	return (!empty($_SESSION['roles']) && $_SESSION['roles'][0] == "Admin");
 }
 
 function IsCustomer() {
-	return (!empty($_SESSION['roles']) && $_SESSION['roles'] == "Customer");
+	return (!empty($_SESSION['roles']) && $_SESSION['roles'][0] == "Customer");
 }
 
 function CanEditUser() {
