@@ -7,12 +7,12 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table class="data-table table table-bordered table-hover">
+                    <table class="data-table table table-bordered table-hover" id="products">
                         <thead>
                         <tr>
                             <th>Product</th>
                             <th>Prijs</th>
-                            <th><a href="<?=URL?>backend/products/SortProductByCategory">Categorie</a></th>
+                            <th onclick="sortTable(0)">Categorie</th>
                             <th>Beschrijving</th>
                             <th>Aantal</th>
                             <th>Afbeelding</th>
