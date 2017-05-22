@@ -23,7 +23,7 @@ function index()
 	}
 	elseif (IsLoggedInSession()==true && IsAdmin() == true)
 	{
-		renderBackend("backend/index");
+		renderAdmin("login/index");
 	}
 }
 

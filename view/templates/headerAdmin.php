@@ -122,8 +122,7 @@
 			if(isset($_SESSION['userId'])):
 			?>
             <li><a href="<?= URL ?>login/logOut"><i class="fa fa-sign-out" aria-hidden="true"></i>Uitloggen</a></li>
-            <li><a href="<?= URL ?>backend/users"><i class="fa fa-users" aria-hidden="true"></i>Gebruikers</a></li>
-            <li><a href="<?= URL ?>backend/products"><i class="fa fa-tags" aria-hidden="true"></i>Producten</a></li>
+            <li><a href="<?= URL ?>backend/index"><i class="fa fa-database" aria-hidden="true"></i>Beheer</a></li>
             <?php
             endif;
             ?>

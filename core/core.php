@@ -37,3 +37,17 @@ function renderBackend($filename, $data = null)
 	require(ROOT . 'view/' . $filename . '.php');
 	require(ROOT . 'view/templates/footerBackend.php');
 }
+
+function renderAdmin($filename, $data = null)
+{
+	if ($data) {
+
+		foreach($data as $key => $value) {
+			$$key = $value;
+		}
+	} 
+
+	require(ROOT . 'view/templates/headerAdmin.php');
+	require(ROOT . 'view/' . $filename . '.php');
+	require(ROOT . 'view/templates/footerAdmin.php');
+}
