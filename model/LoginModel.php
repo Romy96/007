@@ -371,3 +371,4 @@ function AllProducts()
 
 	return $query->fetchAll();
 }
+

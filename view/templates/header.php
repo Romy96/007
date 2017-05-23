@@ -6,6 +6,7 @@
 	<title>Webshop</title>	
 	<link rel="stylesheet" href="<?= URL ?>css/font-awesome.min.css">
 	<link rel="stylesheet" href="<?= URL ?>css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?= URL ?>css/style.css">
 </head>
 <body>
 	<nav>

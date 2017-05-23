@@ -8,6 +8,8 @@ function index()
 	{
 		$user = getAllUsers();
 
+		$products = AllProducts();
+
 		if(empty($user)) 
 		{
 			render("login/index");
@@ -17,13 +19,18 @@ function index()
 		else 
 		{
 			render("login/index", array(
-				'user' => $user
+				'user' => $user,
+				'products' => $products
 			));
 		}
 	}
 	elseif (IsLoggedInSession()==true && IsAdmin() == true)
 	{
-		renderAdmin("login/index");
+		$products = AllProducts();
+
+		renderAdmin("login/index", array(
+			'products' => $products
+		));
 	}
 }
 
