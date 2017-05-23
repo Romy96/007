@@ -5,25 +5,25 @@
     <div class="form-group col-xs-12 floating-label-form-group controls"> <i class="fa fa-user"></i>
         <label for="first_name">Voornaam *</label>
     </div>
-    <input class="form-control type="text" name="first_name" placeholder="Voornaam">
+    <input class="form-control" type="text" name="first_name" placeholder="Voornaam">
     <br>
 
     <div class="form-group col-xs-12 floating-label-form-group controls"> <i class="fa fa-user"></i>
         <label for="last_name">Achternaam *</label>
     </div>
-    <input  class="form-control type="text" name="last_name" placeholder="Achternaam">
+    <input  class="form-control" type="text" name="last_name" placeholder="Achternaam">
     <br>
 
     <div class="form-group col-xs-12 floating-label-form-group controls"> <i class="fa fa-envelope-o"></i>
         <label for="email">Email Addres *</label>
     </div>
-    <input class="form-control type="text" name="email" placeholder="Email address">
+    <input class="form-control" type="text" name="email" placeholder="Email address">
     <br>
 
     <div class="form-group col-xs-12 floating-label-form-group controls"> <i class="fa fa-mobile"></i>
         <label for="telephone">Telefoon nummer *</label>
     </div>
-    <input class="form-control type="text" name="telephone" placeholder="telefoon nummer">
+    <input class="form-control" type="text" name="telephone" placeholder="telefoon nummer">
     <br>
 
     <div class="form-group col-xs-12 floating-label-form-group controls"> <i class="fa fa-file-text"></i>

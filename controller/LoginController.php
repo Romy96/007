@@ -21,7 +21,7 @@ function index()
 }
 
 function login()
-{
+{	
 	if ( IsLoggedInSession()==true ) {
 		echo "U heeft al ingelogd!";
 		render("login/index");
