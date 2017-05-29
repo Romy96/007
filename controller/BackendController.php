@@ -355,5 +355,66 @@ function products()
 	}
 }
 
+function create_product() 
+{
+	if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
 
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		renderBackend("backend/create_product");
+	}
+}
+
+function insert_product() 
+{
+	if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		if (empty($_POST['product']) || empty($_POST['price']) || empty($_POST['category']) || empty($_POST['description']) || empty($_POST['amount']))
+		{
+			echo 'U heeft één van de velden niet ingevuld!';
+			renderBackend("backend/create_product");
+			exit;
+		}
+
+		if(isset($_POST['product']) && isset($_POST['price']) && isset($_POST['category']) && isset($_POST['description']) && isset($_POST['amount']))
+		{
+			CreateProduct($_POST['product'], $_POST['price'], $_POST['category'], $_POST['description'], $_POST['amount']);
+			$products = AllProducts();
+			renderBackend("backend/products", array(
+				'products' => $products
+			));
+			exit;
+		}
+		else
+		{
+			echo 'Het is niet gelukt om het product in de database toe te voegen!';
+			renderBackend("backend/create_product");
+			exit;
+		}
+	}
+}
 

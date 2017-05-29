@@ -372,3 +372,32 @@ function AllProducts()
 	return $query->fetchAll();
 }
 
+function CreateProduct($product = null, $price = null, $category = null, $description = null, $amount = null)
+{
+	$product = isset($_POST['product']) ? $_POST['product'] : null;
+	$price = isset($_POST['price']) ? $_POST['price'] : null;
+	$category = isset($_POST['category']) ? $_POST['category'] : null;
+	$description = isset($_POST['description']) ? $_POST['description'] : null;
+	$amount = isset($_POST['amount']) ? $_POST['amount'] : null;
+
+	if (strlen($product) == 0 || strlen($price) == 0 || strlen($category) == 0 || strlen($description) == 0 || strlen($amount) == 0) {
+		return false;
+	}
+
+	$db = openDatabaseConnection();
+
+	$sql = "INSERT INTO products (product, price, category, description, amount) VALUES (:product, :price, :category, :description, :amount)";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':product' => $product,
+		':price' => $price,
+		':category' => $category,
+		':description' => $description,
+		':amount' => $amount
+	));
+
+	$db = null;
+	
+	return true;
+}
+
