@@ -173,7 +173,7 @@ function contact()
 
 function email()
 {
-	render("login/mail");
+	render("login/email");
 }
 
 function profile($id)
