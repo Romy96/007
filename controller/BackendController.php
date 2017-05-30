@@ -418,3 +418,85 @@ function insert_product()
 	}
 }
 
+function edit_product($id = '')
+{
+	$product = getProductbyId($id);
+
+	if (empty($product))
+	{
+		echo 'product niet gevonden!';
+		$products = AllProducts();
+		renderBackend("backend/products", array(
+			'products' => $products
+		));
+	}
+
+	if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		if(isset($product))
+		{
+			renderBackend("backend/edit_product", array(
+				'product' => $product
+			));
+		}
+		else
+		{
+			$products = AllProducts();
+			renderBackend("backend/products", array(
+				'products' => $products
+			));
+		}
+	}
+}
+
+function delete_product($id)
+{
+	$product = getProductbyId($id);
+
+	if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		if(isset($product))
+		{
+			DeleteProduct($id);
+			$products = AllProducts();
+			renderBackend("backend/products", array(
+				'products' => $products
+			));
+			exit;
+		}
+		else
+		{
+			echo 'Het is niet gelukt om het product te verwijderen!';
+			$products = AllProducts();
+			renderBackend("backend/products", array(
+				'products' => $products
+			));
+		}
+	}
+}

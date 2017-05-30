@@ -53,7 +53,8 @@
                                     </td>
                                     <td>
                                         <div class="btn-group">
-                                            <a href="<?=URL?>backend/products/<?=$row['id']?>" class="btn btn-default btn-flat"><i class="fa fa-pencil"></i></a>
+                                            <a href="<?=URL?>backend/edit_product/<?=$row['id']?>" class="btn btn-default btn-flat"><i class="fa fa-pencil"></i></a>
+                                            <a href="<?=URL?>backend/delete_product/<?=$row['id']?>" onclick="return confirm('Weet je het zeker?')" class="btn btn-default btn-flat"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>

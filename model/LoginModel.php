@@ -401,3 +401,33 @@ function CreateProduct($product = null, $price = null, $category = null, $descri
 	return true;
 }
 
+function getProductbyId($id) 
+{
+	// create database connection
+	$db = openDatabaseConnection();
+	// prepare query and execute
+	$sql = "SELECT * FROM products WHERE id=:id";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':id' => $id
+	));
+
+	$db = null;
+
+	return $query->fetch(PDO::FETCH_ASSOC);	
+}
+
+function DeleteProduct($id)
+{
+	// create database connection
+	$db = openDatabaseConnection();
+	// prepare query and execute
+	$sql = "DELETE FROM products WHERE id=:id";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':id' => $id
+	));
+
+	$db = null;
+}
+
