@@ -153,19 +153,6 @@ function deleteAction($id)
 	}
 }
 
-function forgot()
-{
-	if ( IsLoggedInSession()==false ) {
-		echo "U heeft nog niet ingelogd!";
-		render("login/login");
-		exit();
-	}
-	else
-	{
-		render("login/forgot");
-	}
-}
-
 function contact()
 {
 	render("login/contact");
@@ -183,7 +170,7 @@ function forgot()
 
 function newPassword()
 {
-	
+	checkIfEmailExists();
 }
 
 function profile($id)

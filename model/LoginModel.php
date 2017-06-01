@@ -275,7 +275,7 @@ function editSaveProfile($id, $firstname, $prefix, $lastname, $home_adress, $zip
 	$db = NULL;
 }
 
-function checkIfEmailExist($email)
+function checkIfEmailExists($email)
 {
 	$db = openDatabaseConnection();
 
@@ -289,5 +289,5 @@ function checkIfEmailExist($email)
 
 	$user = $query->fetchAll();
 
-	return $user;
+	var_dump($user);
 }

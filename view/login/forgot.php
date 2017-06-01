@@ -2,7 +2,7 @@
 
 <form action="<?= URL ?>login/newPassword" method="post">
 	<div>
-		<label for="email"></label>
+		<label for="email">Uw email adres</label>
 		<input type="text" name="email">
 	</div>
 	<div>
