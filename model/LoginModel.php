@@ -431,3 +431,21 @@ function DeleteProduct($id)
 	$db = null;
 }
 
+function EditProduct($id, $product, $price, $category, $description, $amount)
+{
+	// create database connection
+	$db = openDatabaseConnection();
+	// prepare query and execute
+	$sql = "UPDATE products SET product=:product, price=:price, category=:category, description=:description, amount=:amount WHERE id=:id";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':product' => $product,
+		':price' => $price,
+		':category' => $category,
+		':description' => $description,
+		':amount' => $amount,
+		':id' => $id
+	));
+
+	$db = null;
+}

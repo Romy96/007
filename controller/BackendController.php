@@ -500,3 +500,71 @@ function delete_product($id)
 		}
 	}
 }
+
+function save_product($id = '')
+{
+	if ( IsLoggedInSession()==false ) {
+	echo "U heeft nog niet ingelogd";
+	render('login/login');
+	exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true)
+	{
+		if (empty($_POST['product']) || empty($_POST['price']) || empty($_POST['category']) || empty($_POST['description']) || empty($_POST['amount']))
+		{
+			echo 'U heeft één van de velden niet ingevuld!';
+			$product = getProductbyId($id);
+
+			if(isset($product))
+			{
+				renderBackend("backend/edit_product", array(
+					'product' => $product
+				));
+			}
+			else
+			{
+				$products = AllProducts();
+				renderBackend("backend/products", array(
+					'products' => $products
+				));
+			}
+		}
+
+		if(isset($_POST['product']) && isset($_POST['price']) && isset($_POST['category']) && isset($_POST['description']) && isset($_POST['amount']))
+		{
+			EditProduct($_POST['id'], $_POST['product'], $_POST['price'], $_POST['category'], $_POST['description'], $_POST['amount']);
+			$products = AllProducts();
+			renderBackend("backend/products", array(
+				'products' => $products
+			));
+			exit;
+		}
+		else
+		{
+			echo 'Het is niet gelukt om het product in de database toe te voegen!';
+			$product = getProductbyId($id);
+
+			if(isset($product))
+			{
+				renderBackend("backend/edit_product", array(
+					'product' => $product
+				));
+			}
+			else
+			{
+				$products = AllProducts();
+				renderBackend("backend/products", array(
+					'products' => $products
+				));
+			}
+		}
+	}
+}
