@@ -4,7 +4,7 @@ if(isset($product)):
 <div class="container">
 	<div class="row">
    				<div class="col-xs-4 item-photo">
-                	<img src="<?=URL?>public/img/<?=$row['image']?>" class="img-responsive" style="max-width:100%;">
+                	<img src="<?=URL?>public/img/<?=$product['image']?>" class="img-responsive" style="max-width:100%;">
                 </div>
                 <div class="col-xs-5" style="border:0px solid gray">
                     <!-- Datos del vendedor y titulo del producto -->

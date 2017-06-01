@@ -31,7 +31,7 @@ endif;
 			if (isset($products)):
 				foreach ($products as $row):
 		?>
-            <a href="<?= URL ?>login/product_info/<?=$row['id']?>">
+            <a style="cursor:pointer" href="<?= URL ?>login/product_info/<?=$row['id']?>">
                 <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter <?=$row['category']?>">
                     <img src="<?=URL?>public/img/<?=$row['image']?>" class="img-responsive">
                     <p><?=$row['product']?></p>
