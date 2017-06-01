@@ -4,15 +4,13 @@
 <!-- jQuery 2.2.3 -->
 <script src="<?= URL ?>plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
-<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button);
-</script>
 <!-- Bootstrap 3.3.6 -->
 <script src="<?= URL ?>js/bootstrap.min.js"></script>
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
 <script src="<?= URL ?>plugins/morris/morris.min.js"></script>
 <!-- Sparkline -->
 <script src="<?= URL ?>plugins/sparkline/jquery.sparkline.min.js"></script>

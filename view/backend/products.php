@@ -14,16 +14,16 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <table class="data-table table table-bordered table-hover" id="products">
+                    <table id="products" class="display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
-                            <th>Product</th>
-                            <th>Prijs</th>
-                            <th onclick="sortTable(0)">Categorie</th>
-                            <th>Beschrijving</th>
-                            <th>Aantal</th>
-                            <th>Afbeelding</th>
-                            <th data-sortable="false">Acties</th>
+                            <th class="no-sort">Product</th>
+                            <th class="no-sort">Prijs</th>
+                            <th>Categorie</th>
+                            <th class="no-sort">Beschrijving</th>
+                            <th class="no-sort">Aantal</th>
+                            <th class="no-sort">Afbeelding</th>
+                            <th class="no-sort" data-sortable="false">Acties</th>
                         </tr>
                         </thead>
                         <tbody>
