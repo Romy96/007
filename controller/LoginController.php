@@ -286,3 +286,40 @@ function profileEditSave($id)
 		}
 	}
 }
+
+function product_info($id)
+{
+	if (IsLoggedInSession()==true && IsAdmin() == false) 
+	{
+		$product = getProductbyId($id);
+
+		if(empty($product)) 
+		{
+			render("login/index");
+			exit();
+		}
+
+		else 
+		{
+			render("login/product_info", array(
+				'product' => $product
+			));
+		}
+	}
+	elseif (IsLoggedInSession()==true && IsAdmin() == true)
+	{
+		$product = getProductbyId($id);
+
+		if(empty($product)) 
+		{
+			render("login/index");
+			exit();
+		}
+		else 
+		{
+		renderAdmin("login/product_info", array(
+			'product' => $product
+		));
+		}
+	}
+}

@@ -35,6 +35,7 @@
 <!-- AdminLTE App -->
 <script src="<?= URL ?>js/app.min.js"></script>
 <script src="<?= URL ?>js/gallery.js"></script>
+<script src="<?= URL ?>js/product.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="<?= URL ?>js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->

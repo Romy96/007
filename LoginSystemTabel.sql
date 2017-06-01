@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Gegenereerd op: 01 jun 2017 om 09:35
+-- Gegenereerd op: 01 jun 2017 om 13:47
 -- Serverversie: 5.6.17
 -- PHP-versie: 5.5.12
 
@@ -142,9 +142,9 @@ CREATE TABLE IF NOT EXISTS `products` (
 --
 
 INSERT INTO `products` (`id`, `product`, `price`, `category`, `description`, `amount`, `image`) VALUES
-(1, 'MicroMemory 8GB, DDR3 8GB DDR3 1333MHz ECC geheugenmodule', '58.00', 'ram-geheugen', 'Intern geheugen: 8 GB\r\nIntern geheugentype: DDR3\r\nGeheugenlayout (modules x formaat): 1 x 8 GB\r\nKloksnelheid geheugen: 1333 Megahertz\r\nECC: ECC ja', '150', '../public/img/ramTest.png'),
-(2, 'MSI 970 GAMING - Moederbord', '99.90', 'moederbord', 'Heeft 6 SATA 600-poorten met RAID-ondersteuning.\r\nMet één druk op de knop overklokken dankzij OC Genie 4.\r\nBeschikt over Killer E2200 netwerk-chip, spelen zonder lag.\r\nVeel USB-poorten voor het aansluiten van randapparatuur.\r\nOndersteunt AMD CrossfireX en NVIDIA SLI. Heeft ruimte voor 2 videokaarten.\r\nDit moederbord beschikt niet over wifi en bluetooth.\r\nOndersteunt alleen processors tot maximaal 200 TDP', '50', '../public/img/motherboardTest.png'),
-(3, 'Western Digital externe harde schijf: My Book Thunderbolt Duo 6TB - Zwart, Zilver', '127.00', 'harddrive', '6000 GB opslagcapaciteit harde schijf\r\n5200 RPM rotatiesnelheid harde schijf\r\n3.5 " harde schijf, omvang', '250', '../public/img/harddriveTest.png');
+(1, 'MicroMemory 8GB, DDR3 8GB DDR3 1333MHz ECC geheugenmodule', '58.00', 'ram-geheugen', 'Intern geheugen: 8 GB\r\nIntern geheugentype: DDR3\r\nGeheugenlayout (modules x formaat): 1 x 8 GB\r\nKloksnelheid geheugen: 1333 Megahertz\r\nECC: ECC ja', '150', 'ramTest.png'),
+(2, 'MSI 970 GAMING - Moederbord', '99.90', 'moederbord', 'Heeft 6 SATA 600-poorten met RAID-ondersteuning.\r\nMet één druk op de knop overklokken dankzij OC Genie 4.\r\nBeschikt over Killer E2200 netwerk-chip, spelen zonder lag.\r\nVeel USB-poorten voor het aansluiten van randapparatuur.\r\nOndersteunt AMD CrossfireX en NVIDIA SLI. Heeft ruimte voor 2 videokaarten.\r\nDit moederbord beschikt niet over wifi en bluetooth.\r\nOndersteunt alleen processors tot maximaal 200 TDP', '50', 'motherboardTest.png'),
+(3, 'Western Digital externe harde schijf: My Book Thunderbolt Duo 6TB - Zwart, Zilver', '127.00', 'harddrive', '6000 GB opslagcapaciteit harde schijf\r\n5200 RPM rotatiesnelheid harde schijf\r\n3.5 " harde schijf, omvang', '250', 'harddriveTest.png');
 
 -- --------------------------------------------------------
 

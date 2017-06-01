@@ -31,11 +31,13 @@ endif;
 			if (isset($products)):
 				foreach ($products as $row):
 		?>
-            <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter <?=$row['category']?>">
-                <img src="<?=$row['image']?>" class="img-responsive">
-                <p><?=$row['product']?></p>
-                <p><?=$row['price']?></p>
-            </div>
+            <a href="<?= URL ?>login/product_info/<?=$row['id']?>">
+                <div class="gallery_product col-lg-4 col-md-4 col-sm-4 col-xs-6 filter <?=$row['category']?>">
+                    <img src="<?=URL?>public/img/<?=$row['image']?>" class="img-responsive">
+                    <p><?=$row['product']?></p>
+                    <p><span><i class="fa fa-eur" aria-hidden="true"></i></span><?=$row['price']?></p>
+                </div>
+            </a>
         <?php
             	endforeach;
             endif;

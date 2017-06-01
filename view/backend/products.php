@@ -49,7 +49,7 @@
                                         <?=$row['amount']?>
                                     </td>
                                     <td>
-										<img style="max-width:200px;max-height:200px;" src="<?=$row['image']?>" alt="plaatje">
+										<img style="max-width:200px;max-height:200px;" src="<?=URL?>public/img/<?=$row['image']?>" alt="plaatje">
                                     </td>
                                     <td>
                                         <div class="btn-group">
