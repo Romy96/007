@@ -275,3 +275,19 @@ function editSaveProfile($id, $firstname, $prefix, $lastname, $home_adress, $zip
 	$db = NULL;
 }
 
+function checkIfEmailExist($email)
+{
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT * FROM login WHERE email=:email";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':email' => $email
+		));
+
+	$db = null;
+
+	$user = $query->fetchAll();
+
+	return $user;
+}

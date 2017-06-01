@@ -171,9 +171,19 @@ function contact()
 	render("login/contact");
 }
 
-function email()
+function contactEmail()
 {
-	render("login/email");
+	render("login/contactEmail");
+}
+
+function forgot()
+{
+	render("login/forgot");
+}
+
+function newPassword()
+{
+	
 }
 
 function profile($id)
