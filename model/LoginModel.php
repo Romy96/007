@@ -277,6 +277,7 @@ function editSaveProfile($id, $firstname, $prefix, $lastname, $home_adress, $zip
 
 function checkIfEmailExists($email)
 {
+	// check if the email is in the database
 	$db = openDatabaseConnection();
 
 	$sql = "SELECT * FROM login WHERE email=:email";
@@ -289,5 +290,39 @@ function checkIfEmailExists($email)
 
 	$user = $query->fetchAll();
 
-	var_dump($user);
+	// if we get a row back them we return true
+	if (count($user) > 0) {
+		return $user;
+	} else {
+		echo "Deze email staat niet geregistreerd!";
+		return false;
+	}
+}
+
+function generateRandomPassword()
+{
+	// generate a random password from a string of letters and numbers
+	$alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+    $password = array();
+    $alphaLength = strlen($alphabet) - 1;
+    for ($i = 0; $i < 8; $i++) {
+        $n = rand(0, $alphaLength);
+        $password[] = $alphabet[$n];
+    }
+    return implode($password);
+}
+
+function editPassword($id, $password)
+{
+	// create database connection
+	$db = openDatabaseConnection();
+	// prepare query and execute
+	$sql = "UPDATE login SET password=:password WHERE id=:id";
+		$query = $db->prepare($sql);
+		$query->execute(array(
+		':id' => $id,
+		':password' => md5($password)
+	));
+	// close connection
+	$db = NULL;
 }

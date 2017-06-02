@@ -170,7 +170,29 @@ function forgot()
 
 function newPassword()
 {
-	checkIfEmailExists();
+	$user = checkIfEmailExists($_POST['email']);
+	if ($user !== false) {
+		$newPassword = generateRandomPassword();
+		echo $newPassword;
+		editPassword($user[0]['id'], $newPassword);
+
+	    $email_to = "jurre.kon@gmail.com";
+	    $email_from = "davinciAO007@gmail.com";
+	    // change email to $_POST['email']
+    	$email_subject = "Nieuw wachtwoord";
+
+    	$email_message = "Beste" . $user[0]['firstname'] . " " . $user[0]['lastname'] . "\n\n";
+    	$email_message .= "Uw nieuwe wachtwoord is " . $newPassword . ".\n";
+    	$email_message .= "Met vriendelijke groet,\n\n";
+    	$email_message .= "007";
+ 
+    	// create email headers
+
+	    $headers = 'From: '.$email_from."\r\n". 
+    	'Reply-To: '.$email_from."\r\n" .
+    	'X-Mailer: PHP/' . phpversion();
+    	mail($email_to, $email_subject, $email_message, $headers);
+	}	
 }
 
 function profile($id)

@@ -7,6 +7,6 @@
 	</div>
 	<div>
 		<label></label>
-		<input type="submit" value="Save">
+		<input type="submit" value="Send">
 	</div>
 </form>
