@@ -123,6 +123,7 @@
 			?>
             <li><a href="<?= URL ?>login/logOut"><i class="fa fa-sign-out" aria-hidden="true"></i>Uitloggen</a></li>
             <li><a href="<?= URL ?>backend/index"><i class="fa fa-database" aria-hidden="true"></i>Beheer</a></li>
+            <li><a href="<?= URL ?>login/shoppingcart/<?= $_SESSION['userId'] ?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
             <?php
             endif;
             ?>

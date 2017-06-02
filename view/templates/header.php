@@ -17,6 +17,7 @@
 		<li><i class="fa fa-user" aria-hidden="true"></i> Gebruiker: <?=$_SESSION['username']?> </li>
 		<li><a href="<?= URL ?>login/logOut"><i class="fa fa-sign-out" aria-hidden="true"></i> Uitloggen </a></li>
 		<li><a href="<?= URL ?>login/profile/<?= $_SESSION['userId'] ?>">Profiel</a></li>
+		<li><a href="<?= URL ?>login/shoppingcart/<?= $_SESSION['userId'] ?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
 		<?php
 		; else:
 		?>

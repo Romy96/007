@@ -3,6 +3,7 @@ if(isset($product)):
 ?>
 <div class="container">
 	<div class="row">
+		<form method="post" action="<?=URL?>login/addtocart.php/<?=$product['id']?>">
    				<div class="col-xs-4 item-photo">
                 	<img src="<?=URL?>public/img/<?=$product['image']?>" class="img-responsive" style="max-width:100%;">
                 </div>

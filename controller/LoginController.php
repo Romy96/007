@@ -323,3 +323,27 @@ function product_info($id)
 		}
 	}
 }
+
+
+function shoppingcart($id)
+{
+	if (IsLoggedInSession()==false) 
+	{
+		echo 'U bent nog niet ingelogd!';
+		render("login/login");
+	}
+	elseif (IsLoggedInSession()==true && IsAdmin() == false) 
+	{
+		$user = getUser($id);
+		render("login/shoppingcart", array(
+			':user' => $user
+		));
+	}
+	elseif (IsLoggedInSession()==true && IsAdmin() == true) 
+	{
+		$user = getUser($id);
+		renderAdmin("login/shoppingcart", array(
+			':user' => $user
+		));
+	}
+}

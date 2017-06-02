@@ -449,3 +449,13 @@ function EditProduct($id, $product, $price, $category, $description, $amount)
 
 	$db = null;
 }
+
+function AddToCart($id)
+{
+
+}
+
+function DisplayCartProducts()
+{
+	
+}
