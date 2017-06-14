@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Gegenereerd op: 01 jun 2017 om 13:47
+-- Gegenereerd op: 14 jun 2017 om 10:04
 -- Serverversie: 5.6.17
 -- PHP-versie: 5.5.12
 
@@ -51,6 +51,24 @@ INSERT INTO `login` (`id`, `firstname`, `prefix`, `lastname`, `username`, `passw
 (4, 'asdfasf', '', 'asdfasdf', 'test', '827ccb0eea8a706c4c34a16891f84e7b', 'test@test.com', '2017-05-04 09:35:40', 'asdfasdf', 'asdasdf'),
 (11, 'Romy', '', 'Bijkerk', 'romy96', 'f9a55ef26d167bc9033d6c26ab3a5be7', 'romy-bijkerk@hotmail.com', '2017-05-12 05:33:41', 'Tiende Penninglaan 292', '4205 SM'),
 (12, 'jurre', '', 'kon', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@test.com', '2017-05-18 07:41:17', 'Fantasielaan 3', '5342 FH');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `login_product`
+--
+
+CREATE TABLE IF NOT EXISTS `login_product` (
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `login_product`
+--
+
+INSERT INTO `login_product` (`user_id`, `product_id`) VALUES
+(11, 1);
 
 -- --------------------------------------------------------
 
@@ -135,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `amount` varchar(10) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `products`

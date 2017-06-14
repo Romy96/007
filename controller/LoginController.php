@@ -332,26 +332,92 @@ function product_info($id)
 	}
 }
 
-
-function shoppingcart($id)
+function AddProductToCart($product_id = '', $user_id = '')
 {
 	if (IsLoggedInSession()==false) 
 	{
 		echo 'U bent nog niet ingelogd!';
 		render("login/login");
 	}
-	elseif (IsLoggedInSession()==true && IsAdmin() == false) 
+	elseif (IsLoggedInSession()==true && IsAdmin()==false) 
 	{
-		$user = getUser($id);
-		render("login/shoppingcart", array(
-			':user' => $user
-		));
+		if(empty($_POST['product_id']) && empty($_POST['user_id']))
+		{
+			echo 'producten niet gevonden!';
+			$product = getProductbyId($product_id);
+			render("login/product_info", array(
+				'product' => $product
+			));
+		}
+		elseif(isset($_POST['product_id']) && isset($_POST['user_id']))
+		{
+			AddToCart($_POST['product_id'], $_POST['user_id']);
+			header("Location:" . URL . "login/shoppingcart");
+		}
 	}
-	elseif (IsLoggedInSession()==true && IsAdmin() == true) 
+		elseif (IsLoggedInSession()==true && IsAdmin()==true) 
+		{
+		if(empty($_POST['product_id'] && empty($_POST['user_id'])))
+		{
+			echo 'id van product niet gevonden!';
+			$product = getProductbyId($id);
+			renderAdmin("login/product_info", array(
+				'product' => $product
+			));
+		}
+		elseif(isset($_POST['product_id']) && isset($_POST['user_id']))
+		{
+			AddToCart($_POST['product_id'], $_POST['user_id']);
+			header("Location:" . URL . "login/shoppingcart");
+		}
+	}
+}
+
+function shoppingcart($user_id = '', $product_id = '')
+{
+	if (IsLoggedInSession()==false) 
 	{
-		$user = getUser($id);
-		renderAdmin("login/shoppingcart", array(
-			':user' => $user
+		echo 'U bent nog niet ingelogd!';
+		render("login/login");
+	}
+	elseif (IsLoggedInSession()==true && IsAdmin()==false) 
+	{
+		$ProductsofUser = DisplayCartProducts($user_id, $product_id);
+
+		if(empty($ProductsofUser))
+		{
+			echo 'Geen producten gevonden!';
+			$user = getAllUsers();
+			$products = AllProducts();
+			render("login/index", array(
+				'user' => $user,
+				'products' => $products
+			));
+		}
+		elseif(isset($ProductsofUser))
+		{
+		render("login/shoppingcart", array(
+			'ProductsofUser' => $ProductsofUser
 		));
+		}
+	}
+	elseif (IsLoggedInSession()==true && IsAdmin()==true) 
+	{
+		$ProductsofUser = DisplayCartProducts($user_id, $product_id);
+
+		if(empty($ProductsofUser))
+		{
+			echo 'Geen producten gevonden!';
+			$products = AllProducts();
+			renderAdmin("login/index", array(
+				'products' => $products
+			));
+		}
+		elseif(isset($ProductsofUser))
+		{
+		renderAdmin("login/shoppingcart", array(
+			'ProductsofUser' => $ProductsofUser
+		));
+		}
 	}
 }
