@@ -450,12 +450,91 @@ function EditProduct($id, $product, $price, $category, $description, $amount)
 	$db = null;
 }
 
-function AddToCart($id)
+function AddToCart($product_id = null, $user_id = null)
 {
+	$product_id = isset($_POST['product_id']) ? $_POST['product_id'] : null;
+	$user_id = isset($_POST['user_id']) ? $_POST['user_id'] : null;
 
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT * FROM products WHERE id=:productid";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':productid' => $product_id
+	));
+
+	$row = $query->fetch(PDO::FETCH_ASSOC);
+	$rowCount = $query->rowCount();
+
+	if($rowCount == 1)
+	{
+		$sql2 = "SELECT * FROM login WHERE id=:userid";
+		$query2 = $db->prepare($sql2);
+		$query2->execute(array(
+			':userid' => $user_id
+		));
+
+		$row2 = $query2->fetch(PDO::FETCH_ASSOC);
+		$rowCount2 = $query2->rowCount();
+
+		if($rowCount2 == 1)
+		{
+			if(isset($product_id) && isset($user_id))
+			{
+				$sql3 = "INSERT INTO login_product (user_id, product_id) VALUES (:userid, :productid)";
+				$query3 = $db->prepare($sql3);
+				$query3->execute(array(
+					':userid' => $user_id,
+					':productid' => $product_id
+				));
+			}
+		}
+
+		$db = null;
+
+		return true;
+	}
+	else
+	{
+		$db = null;
+		return false;
+	}
 }
 
-function DisplayCartProducts()
+function DisplayCartProducts($user_id, $product_id)
 {
-	
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT product_id FROM login_product WHERE user_id = :userid";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':userid' => $user_id
+	));
+
+	$products = $query->fetchAll();
+
+	if(isset($products))
+	{
+		foreach ($products as $row)
+		{
+			$product_id = $row['product_id'];
+
+			$sql2 = "SELECT * FROM products WHERE id=:productid";
+			$query2 = $db->prepare($sql2);
+			$query2->execute(array(
+				':productid' => $product_id
+			));
+			return $query2->fetchAll();
+		}
+
+		$db = null;
+
+		return true;
+	}
+	else
+	{
+		$db = null;
+
+		return false;
+	}
 }

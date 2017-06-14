@@ -3,7 +3,7 @@ if(isset($product)):
 ?>
 <div class="container">
 	<div class="row">
-		<form method="post" action="<?=URL?>login/addtocart.php/<?=$product['id']?>">
+		<form method="post" action="<?=URL?>login/AddProductToCart/<?=$product['id']?>&&<?=$_SESSION['userId']?>">
    				<div class="col-xs-4 item-photo">
                 	<img src="<?=URL?>public/img/<?=$product['image']?>" class="img-responsive" style="max-width:100%;">
                 </div>
@@ -27,13 +27,15 @@ if(isset($product)):
                         <h6 class="title-attr"><small>Aantal</small></h6>                    
                         <div>
                             <div class="btn-minus"><span class="glyphicon glyphicon-minus"></span></div>
-                            <input value="1" />
+                            <input type="text" name="product_qty" value="1" />
                             <div class="btn-plus"><span class="glyphicon glyphicon-plus"></span></div>
                         </div>
                     </div>                
 
                     <!-- Botones de compra -->
                     <div class="section" style="padding-bottom:20px;">
+                        <input type="hidden" name="product_id" value="<?=$product['id']?>" />
+                        <input type="hidden" name="user_id" value="<?=$_SESSION['userId']?>" />
                         <button class="btn btn-success"><span style="margin-right:20px" class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>In winkelwagen</button>
                     </div>                                        
                 </div>                              
@@ -49,7 +51,8 @@ if(isset($product)):
                             </small>
                         </p>
                     </div>
-                </div>		
+                </div>
+            </form>		
 	</div>
 </div>
 <?php
