@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Gegenereerd op: 14 jun 2017 om 10:04
+-- Gegenereerd op: 14 jun 2017 om 11:59
 -- Serverversie: 5.6.17
 -- PHP-versie: 5.5.12
 
@@ -62,13 +62,6 @@ CREATE TABLE IF NOT EXISTS `login_product` (
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Gegevens worden geëxporteerd voor tabel `login_product`
---
-
-INSERT INTO `login_product` (`user_id`, `product_id`) VALUES
-(11, 1);
 
 -- --------------------------------------------------------
 

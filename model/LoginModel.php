@@ -503,6 +503,8 @@ function AddToCart($product_id = null, $user_id = null)
 
 function DisplayCartProducts($user_id, $product_id)
 {
+	//var_export($user_id);
+
 	$db = openDatabaseConnection();
 
 	$sql = "SELECT product_id FROM login_product WHERE user_id = :userid";
@@ -511,11 +513,16 @@ function DisplayCartProducts($user_id, $product_id)
 		':userid' => $user_id
 	));
 
-	$products = $query->fetchAll();
+	$productids = $query->fetchAll();
 
-	if(isset($products))
+	//var_export($products);
+	//die();
+
+	if(isset($productids))
 	{
-		foreach ($products as $row)
+		$products = [];
+
+		foreach ($productids as $row)
 		{
 			$product_id = $row['product_id'];
 
@@ -524,12 +531,13 @@ function DisplayCartProducts($user_id, $product_id)
 			$query2->execute(array(
 				':productid' => $product_id
 			));
-			return $query2->fetchAll();
+
+			$products[] = $query2->fetch();
 		}
 
 		$db = null;
 
-		return true;
+		return $products;
 	}
 	else
 	{
@@ -537,4 +545,28 @@ function DisplayCartProducts($user_id, $product_id)
 
 		return false;
 	}
+}
+
+function RemoveProductfromCart($product_id = null, $user_id = null)
+{
+	
+	$db = openDatabaseConnection();
+
+	$sql = "DELETE FROM login_product WHERE product_id=:productid AND user_id=:userid";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':productid' => $product_id,
+		':userid' => $user_id
+	));
+
+	 $error_info = $query->errorInfo();
+    if ( $error_info[0] != '00000') {
+        // something went wrong
+        $_SESSION['errors'][] = $error_info[2];
+        return false;
+    }
+    
+	$db = null;
+
+	return true;
 }
