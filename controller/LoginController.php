@@ -2,8 +2,10 @@
 
 require(ROOT . "model/LoginModel.php");
 
+//index function
 function index()
 {
+	// if you loggedsession is true en IsAdmin is false then get all users and all products
 	if (IsLoggedInSession()==true && IsAdmin() == false) 
 	{
 		$user = getAllUsers();
@@ -34,13 +36,16 @@ function index()
 	}
 }
 
+// function login
 function login()
 {
+	// if logged in session is true then echo u heeft al ingelogd
 	if ( IsLoggedInSession()==true ) {
 		echo "U heeft al ingelogd!";
 		render("login/index");
 		exit();
 	}
+	// else is the post username is set and password go tho login/index
 	else {
 		if(isset($_POST["username"]) && isset($_POST["password"])) {
 			if(loginUser($_POST['username'], $_POST['password']))
@@ -48,6 +53,7 @@ function login()
 				header("Location:" . URL . "login/index");
 				exit();
 			}else{
+				// else go to login/login and echo ownee het is een fout help
 				render("login/login");
 				echo 'ownee het is een fout help';
 				exit();
@@ -64,11 +70,13 @@ function login()
 
 function register()
 {
+	// is session is logged is true echo u bent al ingelogd! and render login/index
 	if ( IsLoggedInSession()==true ) {
 		echo "U bent al ingelogd!";
 		render("login/index");
 		exit();
 	}
+	// else go to login/register
 	else {
 		render("login/register");
 		exit();

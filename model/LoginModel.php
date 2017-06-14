@@ -1,7 +1,8 @@
 <?php
-
+// create user function
 function createUser($firstname = null, $prefix = null, $lastname = null, $home_adress = null, $zip_code = null, $username = null, $password = null, $email = null)
 {
+	// checking everthing for the post
 	$firstname = isset($_POST['firstname']) ? $_POST['firstname'] : null;
 	$prefix = isset($_POST['prefix']) ? $_POST['prefix'] : null;
 	$lastname = isset($_POST['lastname']) ? $_POST['lastname'] : null;
@@ -18,7 +19,7 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $home_a
 	
 	$db = openDatabaseConnection();
 
-
+	// insert into the database, in the table login
 	$sql = "INSERT INTO login(firstname, prefix, lastname, home_adress, zip_code, username, password, email) VALUES (:firstname, :prefix, :lastname, :home_adress, :zip_code,:username, :password, :email)";
 	$query = $db->prepare($sql);
 	$query->execute(array(
@@ -37,21 +38,21 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $home_a
 	return true;
 }
 
-
+//fucntion for login users
 function loginUser($username = null, $password = null)
 {
 	$db = openDatabaseConnection();
-
+// checking username and password
 	$username = $_POST['username'];
 	$password = md5($_POST['password']);
-
+// select from database, table login
     $result1 = $db->prepare("SELECT * FROM login WHERE username = '$username' AND  password = '$password'");
  	$result1->execute();
  	$row = $result1->fetch(PDO::FETCH_ASSOC);
  	$rowCount  = $result1->rowCount();
 
  	$login_id = $row['id'];
-
+// if rowcount is equil to 1 then log in
     if($rowCount == 1 )
 	{
 		$_SESSION['userId'] = $row['id'];
@@ -113,7 +114,9 @@ function loginUser($username = null, $password = null)
 	}
 }
 
+// fucntion logged in
 function IsLoggedInSession() {
+	// if userid is equil to false then return 0 else return 1
 	if (isset($_SESSION['userId'])==false || empty($_SESSION['userId']) ) {
 		return 0;
 	}
@@ -209,7 +212,7 @@ function GetRolesIdsForUserId($id) {
 	return $query->fetchAll();
 }
 
-
+// get all users from database, table login
 function getAllUsers() 
 {
 	$db = openDatabaseConnection();
@@ -258,10 +261,11 @@ function sendEmail()
 	
 }
 
+// function logout
 function LogOut() {
 	echo "Logged out";
 	header("location: ". URL ."login/login");
-
+// unset session, unset de userid, username and if it is a admin unset the admin.
 	unset($_SESSION['userId'], $_SESSION['username'], $_SESSION['isAdmin']);
 	$_SESSION = [];
 }
@@ -306,9 +310,10 @@ function editUser($id = null, $username = null, $password = null, $email = null,
 	$db = null;
 }
 
-
+// save profile function
 function saveProfile($id = null, $firstname = null, $prefix = null, $lastname = null, $home_adress = null, $zip_code = null, $username = null, $email = null)
 {
+	// look if the post is set
 	$firstname = isset($_POST['firstname']) ? $_POST['firstname'] : null;
 	$prefix = isset($_POST['prefix']) ? $_POST['prefix'] : null;
 	$lastname = isset($_POST['lastname']) ? $_POST['lastname'] : null;
@@ -320,7 +325,7 @@ function saveProfile($id = null, $firstname = null, $prefix = null, $lastname = 
 
 	//Bewerkt de patient als alles op orde loopt.
 	$db = openDatabaseConnection();
-
+// update user in the database, table login
 	$sql = "UPDATE login SET firstname=:firstname, prefix=:prefix, lastname=:lastname, home_adress=:home_adress, zip_code=:zip_code, username=:username, email=:email WHERE id=:id";
 	$query = $db->prepare($sql);
 	$query->execute(array(
