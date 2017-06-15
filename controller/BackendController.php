@@ -568,3 +568,71 @@ function save_product($id = '')
 		}
 	}
 }
+
+function roles()
+{
+	if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		$roles = getAllRoles();
+
+		if(!isset($roles))
+		{
+			echo 'Geen rollen gevonden!';
+			renderBackend("backend/index");
+			exit;
+		}
+		elseif (isset($roles))
+		{
+			renderBackend("backend/roles", array(
+				'roles' => $roles
+			));
+		}
+	}
+}
+
+function create_role()
+{
+	if ( IsLoggedInSession()==false ) {
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		$permissions = getAllPermissions();
+
+		if(!isset($permissions))
+		{
+			echo 'Geen recten gevonden!';
+			header('Location: ' . URL . 'backend/roles');
+			exit;
+		}
+		elseif (isset($permissions))
+		{
+			renderBackend("backend/create_role", array(
+				'permissions' => $permissions
+			));
+		}
+	}
+}

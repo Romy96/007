@@ -553,8 +553,7 @@ function DisplayCartProducts($user_id, $product_id)
 }
 
 function RemoveProductfromCart($product_id = null, $user_id = null)
-{
-	
+{	
 	$db = openDatabaseConnection();
 
 	$sql = "DELETE FROM login_product WHERE product_id=:productid AND user_id=:userid";
@@ -574,4 +573,20 @@ function RemoveProductfromCart($product_id = null, $user_id = null)
 	$db = null;
 
 	return true;
+}
+
+function create_role($role = null, $permission = null)
+{
+	$role = isset($_POST['role']) ? $_POST['role'] : null;
+	$permission = isset($_POST['permission']) ? $_POST['permission'] : null;
+
+	$db = openDatabaseConnection();
+
+	$sql = "INSERT INTO roles (name) VALUES (:role)";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':role' => $role
+	));
+
+	
 }
