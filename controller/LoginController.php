@@ -352,15 +352,15 @@ function AddProductToCart($product_id = '', $user_id = '')
 		elseif(isset($_POST['product_id']) && isset($_POST['user_id']))
 		{
 			AddToCart($_POST['product_id'], $_POST['user_id']);
-			header("Location:" . URL . "login/shoppingcart");
+			header("Location:" . URL . "login/shoppingcart/" . $_POST['user_id']);
 		}
 	}
 		elseif (IsLoggedInSession()==true && IsAdmin()==true) 
 		{
-		if(empty($_POST['product_id'] && empty($_POST['user_id'])))
+		if(empty($_POST['product_id']) && empty($_POST['user_id']))
 		{
 			echo 'id van product niet gevonden!';
-			$product = getProductbyId($id);
+			$product = getProductbyId($product_id);
 			renderAdmin("login/product_info", array(
 				'product' => $product
 			));
@@ -368,7 +368,7 @@ function AddProductToCart($product_id = '', $user_id = '')
 		elseif(isset($_POST['product_id']) && isset($_POST['user_id']))
 		{
 			AddToCart($_POST['product_id'], $_POST['user_id']);
-			header("Location:" . URL . "login/shoppingcart");
+			header("Location:" . URL . "login/shoppingcart/" . $_POST['user_id']);
 		}
 	}
 }
@@ -438,17 +438,14 @@ function remove_product($product_id = '', $user_id = '')
 		if (empty($product_id) && empty($user_id))
 		{
 			echo 'Product niet gevonden!';
-			$ProductsofUser = DisplayCartProducts($user_id, $product_id);
-			render("login/shoppingcart", array(
-				'ProductsofUser' => $ProductsofUser
-			));
+			header('location: ' . URL . 'login/shoppingcart/' . $user_id);
 			exit();
 		}
 		elseif (isset($product_id) && isset($user_id))
 		{
 			RemoveProductfromCart($product_id, $user_id);
 			echo 'product is verwijderd!';
-			header('location: ' . URL . 'login/shoppingcart');
+			header('location: ' . URL . 'login/shoppingcart/' . $user_id);
 			exit();
 		}
 	}
@@ -458,16 +455,14 @@ function remove_product($product_id = '', $user_id = '')
 		{
 			echo 'Product niet gevonden!';
 			$ProductsofUser = DisplayCartProducts($user_id, $product_id);
-			renderAdmin("login/shoppingcart", array(
-				'ProductsofUser' => $ProductsofUser
-			));
+			header('location: ' . URL . 'login/shoppingcart/' . $user_id);
 			exit();
 		}
 		elseif (isset($product_id) && isset($user_id))
 		{
 			RemoveProductfromCart($product_id, $user_id);
 			echo 'product is verwijderd!';
-			header('location: ' . URL . 'login/shoppingcart');
+			header('location: ' . URL . 'login/shoppingcart/' . $user_id);
 			exit();
 		}
 	}

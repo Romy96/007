@@ -575,10 +575,9 @@ function RemoveProductfromCart($product_id = null, $user_id = null)
 	return true;
 }
 
-function create_role($role = null, $permission = null)
+function createRole($role = null)
 {
 	$role = isset($_POST['role']) ? $_POST['role'] : null;
-	$permission = isset($_POST['permission']) ? $_POST['permission'] : null;
 
 	$db = openDatabaseConnection();
 
@@ -588,5 +587,5 @@ function create_role($role = null, $permission = null)
 		':role' => $role
 	));
 
-	
+	$db = null;
 }

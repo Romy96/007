@@ -605,7 +605,8 @@ function roles()
 
 function create_role()
 {
-	if ( IsLoggedInSession()==false ) {
+	if ( IsLoggedInSession()==false ) 
+	{
 		echo "U heeft nog niet ingelogd";
 		render('login/login');
 		exit;
@@ -620,19 +621,40 @@ function create_role()
 
 	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
 	{
-		$permissions = getAllPermissions();
+		renderBackend("backend/create_role");
+	}
+}
 
-		if(!isset($permissions))
+function insert_role()
+{
+	if ( IsLoggedInSession()==false ) 
+	{
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		if(empty($_POST['role']))
 		{
-			echo 'Geen recten gevonden!';
-			header('Location: ' . URL . 'backend/roles');
+			echo 'De velden zijn leeg!';
+			header('location: ' . URL . 'backend/create_role');
 			exit;
 		}
-		elseif (isset($permissions))
+		elseif(isset($_POST['role']))
 		{
-			renderBackend("backend/create_role", array(
-				'permissions' => $permissions
-			));
+			createRole($_POST['role']);
+			echo 'Er is een nieuw rol toegevoegd!';
+			header('location: ' . URL . 'backend/roles');
+			exit;
 		}
 	}
 }

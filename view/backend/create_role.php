@@ -14,20 +14,6 @@
                                         <input type="text" class="form-control" id="role" name="role" placeholder="Vul naam van rol in (in het engels)" required>
                                     </div>
                                 </div>
-                                <div class='form-group'>
-                                    <label for="permissions">Rechten:</label>
-                                     <div class="input-group">
-                                        	<?php
-                                        		if(isset($permissions)):
-                                        			foreach($permissions as $row): 
-                                        	?>
-							                            <input id="permission" name="permission" type="checkbox" value="<?=$row['displayname']?>"/><?=$row['displayname']?><br>
-                                        	<?php
-                                        			endforeach;
-                                        		endif;
-                                        	?>
-                                    </div>
-                                </div>
                                 <input type="submit" name="btn-submit" id="submit" value="Submit" class="btn btn-info pull-right">
                             </div>
                         </div>

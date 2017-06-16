@@ -111,8 +111,7 @@
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
         <li class="active treeview">
-          <a href="<?= URL ?>login/index">
-            <i class="fa fa-dashboard"></i> <span>Home</span>
+            <a href="<?= URL ?>login/index"><i class="fa fa-home" aria-hidden="true"></i>Home </a>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
