@@ -658,3 +658,106 @@ function insert_role()
 		}
 	}
 }
+
+function permissions()
+{
+	if ( IsLoggedInSession()==false ) 
+	{
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		$permissions = getAllPermissions();
+
+		if(!isset($permissions))
+		{
+			echo 'Geen resultaat!';
+			header('location: ' . URL . 'backend/index');
+			exit;
+		}
+		else
+		{
+			renderBackend("backend/permissions", array(
+				'permissions' => $permissions
+			));
+		}
+	}
+}
+
+function create_permission()
+{
+	if ( IsLoggedInSession()==false ) 
+	{
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		$roles = getAllRoles();
+
+		if(!isset($roles))
+		{
+			echo 'Geen rollen gevonden!';
+			header('location: ' . URL . 'backend/permissions');
+			exit;
+		}
+		else
+		{
+			renderBackend("backend/create_permission", array(
+				'roles' => $roles
+			));
+		}
+	}
+}
+
+function insert_permission()
+{
+	if ( IsLoggedInSession()==false ) 
+	{
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		render("login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		if(!isset($_POST['displayname']) && !isset($_POST['description']) && !isset($_POST['role']))
+		{
+			echo 'Een aantal velden zijn niet ingevuld!';
+			header("Location: " . URL . "backend/create_permission");
+			exit;
+		}
+		else
+		{
+			createPermission($_POST['displayname'], $_POST['description'], $permission_id,  $_POST['role']);
+			header("Location: " . URL . "backend/permissions");
+			exit;
+		}
+	}
+}

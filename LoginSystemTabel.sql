@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Gegenereerd op: 14 jun 2017 om 11:59
+-- Gegenereerd op: 19 jun 2017 om 11:22
 -- Serverversie: 5.6.17
 -- PHP-versie: 5.5.12
 
@@ -94,20 +94,20 @@ INSERT INTO `login_role` (`login_id`, `role_id`) VALUES
 
 CREATE TABLE IF NOT EXISTS `permissions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `permission` varchar(50) DEFAULT NULL,
   `displayname` varchar(50) DEFAULT NULL,
   `description` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `permissions`
 --
 
-INSERT INTO `permissions` (`id`, `permission`, `displayname`, `description`) VALUES
-(1, 'Editing_user', 'Edit user', 'An admin can edit an user from user table'),
-(2, 'Deleting_user', 'Delete user', 'An admin can delete users from user table'),
-(3, 'Editing_own_profile', 'Edit their own profile', 'A user can edit their own profile ');
+INSERT INTO `permissions` (`id`, `displayname`, `description`) VALUES
+(1, 'Edit user', 'An admin can edit an user from user table'),
+(2, 'Delete user', 'An admin can delete users from user table'),
+(3, 'Edit their own profile', 'A user can edit their own profile '),
+(10, 'Create product', 'It allows someone to create a product');
 
 -- --------------------------------------------------------
 
@@ -129,7 +129,8 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (1, 1),
 (2, 1),
 (3, 1),
-(3, 2);
+(3, 2),
+(10, 1);
 
 -- --------------------------------------------------------
 

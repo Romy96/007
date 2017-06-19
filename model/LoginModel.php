@@ -589,3 +589,45 @@ function createRole($role = null)
 
 	$db = null;
 }
+
+function createPermission($permission = null, $description = null, $permission_id = null, $role_id= null)
+{
+	$permission = isset($_POST['permission']) ? $_POST['permission'] : null;
+	$description = isset($_POST['description']) ? $_POST['description'] : null;
+	$role_ids_permission_role = isset($_POST['role']) ? $_POST['role'] : null;
+
+	//Bewerkt de patient als alles op orde loopt.
+	$db = openDatabaseConnection();
+
+
+	$sql = "INSERT INTO permissions (displayname, description) VALUES (:permission, :description)";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':permission' => $permission,
+		':description' => $description
+	));
+
+	$sql2 = "SELECT * FROM permissions WHERE displayname = :permission";
+	$query2 = $db->prepare($sql2);
+	$query2->execute(array(
+		':permission' => $permission
+	));
+
+	$permission_row = $query2->fetch();
+
+	if (is_array($role_ids_permission_role) || is_object($role_ids_permission_role))
+	{
+			foreach ($role_ids_permission_role as $role_id) {
+			$permission_id = $permission_row['id'];
+
+			$sql3 = "INSERT INTO permission_role (permission_id, role_id) VALUES (:permissionid, :roleid)";
+			$query3 = $db->prepare($sql3);
+			$query3->execute(array(
+				':permissionid' => $permission_id,
+				':roleid' => $role_id
+				));
+			}
+	}
+
+	$db = null;
+}

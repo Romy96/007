@@ -1,12 +1,11 @@
-
-<h1>Rollen</h1>
+<h1>Rechten</h1>
 
 <div class="row">
         <div class="col-xs-12">
         <div class="row">
             <div class="btn-group pull-right" style="margin: 0 15px 15px 0;">
-                    <a href="<?=URL?>backend/create_role" class="btn btn-primary btn-flat" style="padding: 4px 10px;">
-                        <i class="fa fa-plus" aria-hidden="true"></i> Nieuwe rol
+                    <a href="<?=URL?>backend/create_permission" class="btn btn-primary btn-flat" style="padding: 4px 10px;">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Nieuwe recht
                     </a>
             </div>
         </div>
@@ -18,18 +17,22 @@
                     <table class="data-table table table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>Rollen</th>
+                            <th>Recht</th>
+                            <th>Beschrijving</th>
                         </tr>
                         </thead>
                         <tbody>
 						
 						<?php
-                        if(isset($roles)):
-                            foreach($roles as $row):
+                        if(isset($permissions)):
+                            foreach($permissions as $row):
                         ?>
                                 <tr>
                                     <td>
-                                        <?=$row['name']?>
+                                        <?=$row['displayname']?>
+                                    </td>
+                                    <td>
+                                    	<?=$row['description']?>
                                     </td>
                                 </tr>
                         <?php

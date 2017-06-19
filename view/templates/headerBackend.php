@@ -127,6 +127,7 @@
             <li><a href="<?= URL ?>backend/users"><i class="fa fa-users" aria-hidden="true"></i>Gebruikers</a></li>
             <li><a href="<?= URL ?>backend/products"><i class="fa fa-tags" aria-hidden="true"></i>Producten</a></li>
             <li><a href="<?= URL ?>backend/roles">Rollen</a></li>
+            <li><a href="<?= URL ?>backend/permissions">Rechten</a></li>
             <?php
             endif;
             ?>
