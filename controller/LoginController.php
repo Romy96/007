@@ -3,36 +3,25 @@
 require(ROOT . "model/LoginModel.php");
 
 //index function
-function index()
+function index($user_id = '')
 {
 	// if you loggedsession is true en IsAdmin is false then get all users and all products
 	if (IsLoggedInSession()==true && IsAdmin() == false) 
 	{
-		$user = getAllUsers();
-
-		$products = AllProducts();
-
-		if(empty($user)) 
-		{
-			render("login/index");
-			exit();
-		}
-
-		else 
-		{
+			$user = getAllUsers();
+			$products = AllProducts();
 			render("login/index", array(
 				'user' => $user,
 				'products' => $products
 			));
-		}
 	}
 	elseif (IsLoggedInSession()==true && IsAdmin() == true)
 	{
-		$products = AllProducts();
+			$products = AllProducts();
 
-		renderAdmin("login/index", array(
-			'products' => $products
-		));
+			renderAdmin("login/index", array(
+				'products' => $products
+			));
 	}
 }
 

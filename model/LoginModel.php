@@ -552,6 +552,7 @@ function DisplayCartProducts($user_id, $product_id)
 	}
 }
 
+
 function RemoveProductfromCart($product_id = null, $user_id = null)
 {	
 	$db = openDatabaseConnection();

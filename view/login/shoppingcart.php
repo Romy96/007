@@ -1,5 +1,9 @@
+
+
+<h1>Winkelmand</h1>
+
 <?php
-if(isset($ProductsofUser)):
+if(!empty($ProductsofUser)):
 ?>
 <div class="container">
     <div class="row">
