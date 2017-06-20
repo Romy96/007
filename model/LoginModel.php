@@ -632,3 +632,20 @@ function createPermission($permission = null, $description = null, $permission_i
 
 	$db = null;
 }
+
+function searchForUser($term)
+{
+	$term = isset($_POST['term']) ? $_POST['term'] : null;
+
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT * FROM login WHERE username LIKE :term";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':term' => $term
+	));
+
+	$db = null;
+
+	return $query->fetchAll();
+}

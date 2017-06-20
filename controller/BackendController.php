@@ -761,3 +761,37 @@ function insert_permission()
 		}
 	}
 }
+
+function search_user()
+{
+	if ( IsLoggedInSession()==false ) 
+	{
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		header("Location: " . URL . "login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		if(empty($_REQUEST['term']))
+		{
+			echo 'Zoekterm niet ingevuld!';
+			header("Location: " . URL . "backend/users");
+			exit;
+		}
+		elseif(!empty($_REQUEST['term']))
+		{
+			$users = searchForUser($_REQUEST['term']);
+			renderBackend("backend/users", array(
+				'users' => $users
+			));
+		}
+	}
+}
