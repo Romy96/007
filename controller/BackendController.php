@@ -525,6 +525,7 @@ function delete_product($id)
 	{
 		if(isset($product))
 		{
+			unlink("img/" . $product['image']);
 			DeleteProduct($id);
 			$products = AllProducts();
 			renderBackend("backend/products", array(
