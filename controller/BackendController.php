@@ -402,7 +402,7 @@ function insert_product()
 
 		if(isset($_POST['product']) && isset($_POST['price']) && isset($_POST['category']) && isset($_POST['description']) && isset($_POST['amount']))
 		{
-			$target_dir = URL . "public/img/";
+			$target_dir = "img/";
 			$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 			$uploadOk = 1;
 			$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -439,13 +439,12 @@ function insert_product()
 			// if everything is ok, try to upload file
 			} else {
 			    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-			        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+			        CreateProduct($_POST['product'], $_POST['price'], $_POST['category'], $_POST['description'], $_POST['amount'], $_FILES['fileToUpload']);
 			    } else {
 			        echo "Sorry, there was an error uploading your file.";
 			    }
 			}
 
-			CreateProduct($_POST['product'], $_POST['price'], $_POST['category'], $_POST['description'], $_POST['amount']);
 			$products = AllProducts();
 			renderBackend("backend/products", array(
 				'products' => $products

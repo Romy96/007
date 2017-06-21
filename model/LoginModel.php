@@ -377,13 +377,15 @@ function AllProducts()
 	return $query->fetchAll();
 }
 
-function CreateProduct($product = null, $price = null, $category = null, $description = null, $amount = null)
+function CreateProduct($product = null, $price = null, $category = null, $description = null, $amount = null, $image = null)
 {
 	$product = isset($_POST['product']) ? $_POST['product'] : null;
 	$price = isset($_POST['price']) ? $_POST['price'] : null;
 	$category = isset($_POST['category']) ? $_POST['category'] : null;
 	$description = isset($_POST['description']) ? $_POST['description'] : null;
 	$amount = isset($_POST['amount']) ? $_POST['amount'] : null;
+	$image = isset($_FILES['fileToUpload']) ? $_FILES['fileToUpload'] : null;
+	$image = $image['name'];
 
 	if (strlen($product) == 0 || strlen($price) == 0 || strlen($category) == 0 || strlen($description) == 0 || strlen($amount) == 0) {
 		return false;
@@ -391,14 +393,15 @@ function CreateProduct($product = null, $price = null, $category = null, $descri
 
 	$db = openDatabaseConnection();
 
-	$sql = "INSERT INTO products (product, price, category, description, amount) VALUES (:product, :price, :category, :description, :amount)";
+	$sql = "INSERT INTO products (product, price, category, description, amount, image) VALUES (:product, :price, :category, :description, :amount, :image)";
 	$query = $db->prepare($sql);
 	$query->execute(array(
 		':product' => $product,
 		':price' => $price,
 		':category' => $category,
 		':description' => $description,
-		':amount' => $amount
+		':amount' => $amount,
+		':image' => $image
 	));
 
 	$db = null;
