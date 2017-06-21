@@ -552,6 +552,7 @@ function DisplayCartProducts($user_id, $product_id)
 	}
 }
 
+
 function RemoveProductfromCart($product_id = null, $user_id = null)
 {	
 	$db = openDatabaseConnection();
@@ -630,4 +631,21 @@ function createPermission($permission = null, $description = null, $permission_i
 	}
 
 	$db = null;
+}
+
+function searchForUser($term)
+{
+	$term = isset($_POST['term']) ? $_POST['term'] : null;
+
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT * FROM login WHERE username LIKE :term";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':term' => $term
+	));
+
+	$db = null;
+
+	return $query->fetchAll();
 }

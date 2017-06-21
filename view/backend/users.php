@@ -3,7 +3,22 @@
 <div class="row">
         <div class="col-xs-12">
             <div class="box box-primary">
-                <div class="box-header">
+                <div class="box-header"> 
+                        <div class="col-md-6">
+                        <form action="<?=URL?>backend/search_user" method="post">  
+                            <h3>Search</h3>
+                            <div id="custom-search-input">
+                                <div class="input-group col-md-12">
+                                    <input type="text" name="term" class="form-control input-lg" placeholder="vul gebruikersnaam in"/><br />  
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-info btn-lg" type="button">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>    
+                        </form> 
+                    </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
