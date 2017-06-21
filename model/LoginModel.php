@@ -439,12 +439,13 @@ function DeleteProduct($id)
 	$db = null;
 }
 
-function EditProduct($id, $product, $price, $category, $description, $amount)
+function EditProduct($id, $product, $price, $category, $description, $amount, $image)
 {
+	$image = $image['name'];
 	// create database connection
 	$db = openDatabaseConnection();
 	// prepare query and execute
-	$sql = "UPDATE products SET product=:product, price=:price, category=:category, description=:description, amount=:amount WHERE id=:id";
+	$sql = "UPDATE products SET product=:product, price=:price, category=:category, description=:description, amount=:amount, image=:image WHERE id=:id";
 	$query = $db->prepare($sql);
 	$query->execute(array(
 		':product' => $product,
@@ -452,6 +453,7 @@ function EditProduct($id, $product, $price, $category, $description, $amount)
 		':category' => $category,
 		':description' => $description,
 		':amount' => $amount,
+		':image' => $image,
 		':id' => $id
 	));
 

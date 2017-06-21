@@ -4,7 +4,7 @@ if(isset($product)):
 <h1>Bewerken product</h1>
 
     <div class="row">
-        <form role="form" method="post" action="<?=URL?>backend/save_product">
+        <form role="form" method="post" action="<?=URL?>backend/save_product" enctype="multipart/form-data">
                 <div class="col-md-12">
                     <div class="nav-tabs-custom">   <!-- white background -->
                         <div class="box-body">      <!-- some whitespace -->
@@ -49,6 +49,13 @@ if(isset($product)):
                                     <label for="amount">Aantal:</label>
                                      <div class="input-group">
                                         <input class="form-control" value="<?=$product['amount']?>" name="amount" type="number" id="amount">
+                                    </div>
+                                </div>
+                                <div class='form-group'>
+                                    <label for="fileToUpload">Select image to upload:</label>
+                                    <p>Current image: <?=$product['image']?></p>
+                                    <div class="input-group">
+                                        <input type="file" name="fileToUpload" id="fileToUpload">
                                     </div>
                                 </div>
                                 <input type="submit" name="btn-submit" id="submit" value="Submit" class="btn btn-info pull-right">
