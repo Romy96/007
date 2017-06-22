@@ -918,3 +918,93 @@ function newsletters()
 		}
 	}
 }
+
+function create_newsletter()
+{
+	if ( IsLoggedInSession()==false ) 
+	{
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		header("Location: " . URL . "login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		renderBackend("backend/create_newsletter");
+	}
+}
+
+function edit_newsletter($id = '')
+{
+		if ( IsLoggedInSession()==false ) 
+	{
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		header("Location: " . URL . "login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		$newsletter = getANewsletter($id);
+
+		if(empty($newsletter))
+		{
+			echo 'Geen nieuwsbrieven gevonden!';
+			header("Location: " . URL . "login/index");
+			exit;
+		}
+		elseif(isset($newsletter))
+		{
+			renderBackend("backend/edit_newsletter", array(
+				'newsletter' => $newsletter
+			));
+		}
+	}
+}
+
+function insert_newsletter()
+{
+	if ( IsLoggedInSession()==false ) 
+	{
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		header("Location: " . URL . "login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		if(empty($_POST['title']) && empty($_POST['description']))
+		{
+			echo 'Er zijn geen velden ingevuld!';
+			header("Location: " . URL . "backend/create_newsletter");
+			exit;
+		}
+		elseif(isset($_POST['title']) && isset($_POST['description']))
+		{
+			createNewsletter($_POST['title'], $_POST['description']);
+			header("Location: " . URL . "backend/newsletters");
+			exit;
+		}
+	}
+}

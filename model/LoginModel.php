@@ -691,3 +691,35 @@ function getNewsletters()
 
 	return $query->fetchAll();
 }
+
+function getANewsletter($id)
+{
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT * FROM newsletters WHERE id=:id";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':id' => $id
+	));
+
+	$db = null;
+
+	return $query->fetch(PDO::FETCH_ASSOC);
+}
+
+function createNewsletter($title = null, $description = null)
+{
+	$title = isset($_POST['title']) ? $_POST['title'] : null;
+	$description = isset($_POST['description']) ? $_POST['description'] : null;
+
+	$db = openDatabaseConnection();
+
+	$sql = "INSERT INTO newsletters (title, description) VALUES (:title, :description)";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':title' => $title,
+		':description' => $description
+	));
+
+	$db = null;
+}
