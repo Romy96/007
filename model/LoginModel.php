@@ -723,3 +723,22 @@ function createNewsletter($title = null, $description = null)
 
 	$db = null;
 }
+
+function editNewsletter($id, $title, $description)
+{
+	$title = isset($_POST['title']) ? $_POST['title'] : null;
+	$description = isset($_POST['description']) ? $_POST['description'] : null;
+	$id = isset($_POST['id']) ? $_POST['id'] : null;
+
+	$db = openDatabaseConnection();
+
+	$sql = "UPDATE newsletters SET title=:title, description=:description WHERE id=:id";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':title' => $title,
+		':description' => $description,
+		':id' => $id
+	));
+
+	$db = null;
+}

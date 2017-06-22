@@ -5,7 +5,7 @@ if(isset($newsletter)):
 <h1>Bewerk nieuwsletter</h1>
 
     <div class="row">
-        <form role="form" method="post" action="<?=URL?>backend/insert_newsletter" enctype="multipart/form-data">
+        <form role="form" method="post" action="<?=URL?>backend/update_newsletter" enctype="multipart/form-data">
                 <div class="col-md-12">
                     <div class="nav-tabs-custom">   <!-- white background -->
                         <div class="box-body">      <!-- some whitespace -->
