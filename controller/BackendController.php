@@ -417,11 +417,6 @@ function insert_product()
 			        $uploadOk = 0;
 			    }
 			}
-			// Check if file already exists
-			if (file_exists($target_file)) {
-			    echo "Sorry, file already exists.";
-			    $uploadOk = 0;
-			}
 			// Check file size
 			if ($_FILES["fileToUpload"]["size"] > 500000) {
 			    echo "Sorry, your file is too large.";
@@ -598,11 +593,6 @@ function save_product($id = '')
 			        $uploadOk = 0;
 			    }
 			}
-			// Check if file already exists
-			if (file_exists($target_file)) {
-			    echo "Sorry, file already exists.";
-			    $uploadOk = 0;
-			}
 			// Check file size
 			if ($_FILES["fileToUpload"]["size"] > 500000) {
 			    echo "Sorry, your file is too large.";
@@ -619,9 +609,9 @@ function save_product($id = '')
 			    echo "Sorry, your file was not uploaded.";
 			// if everything is ok, try to upload file
 			} else {
+			    $currentProduct = getProductbyId($_POST['id']);
+				unlink("img/" . $currentProduct['image']);
 			    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-			    	$currentProduct = getProductbyId($_POST['id']);
-					unlink("img/" . $currentProduct['image']);
 			        EditProduct($_POST['id'], $_POST['product'], $_POST['price'], $_POST['category'], $_POST['description'], $_POST['amount'], $_FILES['fileToUpload']);
 			    } else {
 			        echo "Sorry, there was an error uploading your file.";
