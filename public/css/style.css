@@ -2,10 +2,10 @@
 .gallery-title
 {
     font-size: 36px;
-    color: #42B32F;
+    color: #285dab;
     text-align: center;
     font-weight: 500;
-    margin-bottom: 70px;
+    margin-bottom: 40px;
 }
 .gallery-title:after {
     content: "";
@@ -13,31 +13,31 @@
     width: 7.5%;
     left: 46.5%;
     height: 45px;
-    border-bottom: 1px solid #5e5e5e;
+    border-bottom: 1px solid #285dab;
 }
 .filter-button
 {
     font-size: 18px;
-    border: 1px solid #42B32F;
+    border: 1px solid #285dab;
     border-radius: 5px;
     text-align: center;
-    color: #42B32F;
+    color: #ffffff;
     margin-bottom: 30px;
 
 }
 .filter-button:hover
 {
     font-size: 18px;
-    border: 1px solid #42B32F;
+    border: 1px solid #285dab;
     border-radius: 5px;
     text-align: center;
-    color: #ffffff;
-    background-color: #42B32F;
+    color: black;
+    background-color: #285dab;
 
 }
 .btn-default:active .filter-button:active
 {
-    background-color: #42B32F;
+    background-color: #285dab;
     color: white;
 }
 
@@ -116,3 +116,74 @@ div.section > div > input {margin:0px;padding-left:5px;font-size:10px;padding-ri
 #custom-search-input .glyphicon-search{
     font-size: 23px;
 }
+
+h1{
+    color: #285dab;
+}
+
+.wrapper {    
+    margin-top: 80px;
+    margin-bottom: 20px;
+}
+
+.form-signin {
+  max-width: 420px;
+  padding: 30px 38px 66px;
+  margin: 0 auto;
+  background-color: #eee;
+  border: 3px dotted rgba(0,0,0,0.1);  
+  }
+
+.form-signin-heading {
+  text-align:center;
+  margin-bottom: 30px;
+}
+
+.form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+}
+
+input[type="text"] {
+  margin-bottom: 0px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+input[type="password"] {
+  margin-bottom: 20px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.colorgraph {
+  height: 7px;
+  border-top: 0;
+  background: #c4e17f;
+  border-radius: 5px;
+  background-image: -webkit-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+  background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}
+
+body{
+  padding-top:30px;
+}
+
+.glyphicon {
+  margin-bottom: 10px;margin-right: 10px;
+}
+
+small {
+display: block;
+line-height: 1.428571429;
+color: #999;
+}
+
+.btn{
+  background-color: #285dab;
+}
+

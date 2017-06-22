@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="<?= URL ?>css/style.css">
 </head>
 <body>
+
 	<nav>
 	<ul>
 		<?php
