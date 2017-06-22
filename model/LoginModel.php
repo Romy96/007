@@ -742,3 +742,16 @@ function editNewsletter($id, $title, $description)
 
 	$db = null;
 }
+
+function deleteNewsletter($id)
+{
+	$db = openDatabaseConnection();
+
+	$sql = "DELETE FROM newsletters WHERE id=:id";
+	$query = $db->prepare($sql);
+	$query->execute(array(
+		':id' => $id
+	));
+
+	$db = null;
+}

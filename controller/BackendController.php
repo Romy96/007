@@ -1041,3 +1041,27 @@ function update_newsletter($id)
 		}
 	}
 }
+
+function delete_newsletter($id)
+{
+	if ( IsLoggedInSession()==false ) 
+	{
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		header("Location: " . URL . "login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		deleteNewsletter($id);
+		header("Location: " . URL . "backend/newsletters");
+		exit;
+	}
+}
