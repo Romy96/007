@@ -39,7 +39,7 @@
                                         <div class="btn-group">
                                         	<a href="<?=URL?>backend/send_newsletter/<?=$row['id']?>" class="btn btn-default btn-flat"><i class="fa fa-envelope" aria-hidden="true"></i></a>
                                             <a href="<?=URL?>backend/edit_newsletter/<?=$row['id']?>" class="btn btn-default btn-flat"><i class="fa fa-pencil"></i></a>
-                                            <a href="<?=URL?>backend/delete_newletter/<?=$row['id']?>" onclick="return confirm('Weet je het zeker?')" class="btn btn-default btn-flat"><i class="fa fa-trash"></i></a>
+                                            <a href="<?=URL?>backend/delete_newsletter/<?=$row['id']?>" onclick="return confirm('Weet je het zeker?')" class="btn btn-default btn-flat"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>
