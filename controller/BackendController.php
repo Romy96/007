@@ -882,3 +882,39 @@ function search_user()
 		}
 	}
 }
+
+
+function newsletters()
+{
+	if ( IsLoggedInSession()==false ) 
+	{
+		echo "U heeft nog niet ingelogd";
+		render('login/login');
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == false)
+	{
+		echo "Verboden toegang!";
+		header("Location: " . URL . "login/index");
+		exit;
+	}
+
+	elseif ( IsLoggedInSession()==true && IsAdmin() == true )
+	{
+		$newsletters = getNewsletters();
+
+		if(empty($newsletters))
+		{
+			echo 'Geen nieuwsbrieven gevonden!';
+			header("Location: " . URL . "login/index");
+			exit;
+		}
+		elseif(isset($newsletters))
+		{
+			renderBackend("backend/newsletters", array(
+				'newsletters' => $newsletters
+			));
+		}
+	}
+}

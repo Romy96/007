@@ -678,3 +678,16 @@ function searchForUser($term)
 
 	return $query->fetchAll();
 }
+
+function getNewsletters()
+{
+	$db = openDatabaseConnection();
+
+	$sql = "SELECT * FROM newsletters";
+	$query = $db->prepare($sql);
+	$query->execute();
+
+	$db = null;
+
+	return $query->fetchAll();
+}

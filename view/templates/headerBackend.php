@@ -127,6 +127,7 @@
             <li><a href="<?= URL ?>backend/products"><i class="fa fa-tags" aria-hidden="true"></i>Producten</a></li>
             <li><a href="<?= URL ?>backend/roles">Rollen</a></li>
             <li><a href="<?= URL ?>backend/permissions">Rechten</a></li>
+            <li><a href="<?= URL ?>backend/newsletters"><i class="fa fa-newspaper-o" aria-hidden="true"></i>Nieuwsbrieven</a></li>
             <?php
             endif;
             ?>
