@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Machine: 127.0.0.1
--- Gegenereerd op: 19 jun 2017 om 11:22
+-- Gegenereerd op: 22 jun 2017 om 12:11
 -- Serverversie: 5.6.17
 -- PHP-versie: 5.5.12
 
@@ -37,20 +37,22 @@ CREATE TABLE IF NOT EXISTS `login` (
   `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `home_adress` varchar(255) DEFAULT NULL,
   `zip_code` varchar(50) DEFAULT NULL,
+  `isSubcriber` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Gegevens worden geëxporteerd voor tabel `login`
 --
 
-INSERT INTO `login` (`id`, `firstname`, `prefix`, `lastname`, `username`, `password`, `email`, `date`, `home_adress`, `zip_code`) VALUES
-(1, 'Peter', '', 'Snoek', 'Administrator', 'f19a86bcd60e668b1d8a2b8530f8b9f4', 'davinciAO007@gmail.com', '2017-05-04 08:28:27', NULL, NULL),
-(2, 'Deona', '', 'Secreve', 'tasninta', '0f62265227df1b6d6deec36ab4bc5e76', 'deona.secreve@outlook.com', '2017-05-04 08:28:27', NULL, NULL),
-(3, 'Deona', '', 'Secreve', 'tasninta', '1fb0531a6ece8b027421ff290f7e30b3', 'deona.secreve@outlook.com', '2017-05-04 08:28:27', NULL, NULL),
-(4, 'asdfasf', '', 'asdfasdf', 'test', '827ccb0eea8a706c4c34a16891f84e7b', 'test@test.com', '2017-05-04 09:35:40', 'asdfasdf', 'asdasdf'),
-(11, 'Romy', '', 'Bijkerk', 'romy96', 'f9a55ef26d167bc9033d6c26ab3a5be7', 'romy-bijkerk@hotmail.com', '2017-05-12 05:33:41', 'Tiende Penninglaan 292', '4205 SM'),
-(12, 'jurre', '', 'kon', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@test.com', '2017-05-18 07:41:17', 'Fantasielaan 3', '5342 FH');
+INSERT INTO `login` (`id`, `firstname`, `prefix`, `lastname`, `username`, `password`, `email`, `date`, `home_adress`, `zip_code`, `isSubcriber`) VALUES
+(1, 'Peter', '', 'Snoek', 'Administrator', 'f19a86bcd60e668b1d8a2b8530f8b9f4', 'davinciAO007@gmail.com', '2017-05-04 08:28:27', NULL, NULL, 0),
+(2, 'Deona', '', 'Secreve', 'tasninta', '0f62265227df1b6d6deec36ab4bc5e76', 'deona.secreve@outlook.com', '2017-05-04 08:28:27', NULL, NULL, 0),
+(3, 'Deona', '', 'Secreve', 'tasninta', '1fb0531a6ece8b027421ff290f7e30b3', 'deona.secreve@outlook.com', '2017-05-04 08:28:27', NULL, NULL, 0),
+(4, 'asdfasf', '', 'asdfasdf', 'test', '827ccb0eea8a706c4c34a16891f84e7b', 'test@test.com', '2017-05-04 09:35:40', 'asdfasdf', 'asdasdf', 0),
+(11, 'Romy', '', 'Bijkerk', 'romy96', 'f9a55ef26d167bc9033d6c26ab3a5be7', 'romy-bijkerk@hotmail.com', '2017-05-12 05:33:41', 'Tiende Penninglaan 292', '4205 SM', 0),
+(12, 'jurre', '', 'kon', 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@test.com', '2017-05-18 07:41:17', 'Fantasielaan 3', '5342 FH', 0),
+(13, 'Sandra', '', 'de Jager', 'Sandra1969', '5ee67df20ae2b36be0d0f78bc8ca100f', 'sandradejager1969@gmail.com', '2017-06-22 10:11:10', 'Tiende Penninglaan 292', '4205 SM', 1);
 
 -- --------------------------------------------------------
 
@@ -62,6 +64,14 @@ CREATE TABLE IF NOT EXISTS `login_product` (
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `login_product`
+--
+
+INSERT INTO `login_product` (`user_id`, `product_id`) VALUES
+(1, 1),
+(11, 1);
 
 -- --------------------------------------------------------
 
@@ -85,6 +95,19 @@ INSERT INTO `login_role` (`login_id`, `role_id`) VALUES
 (3, 2),
 (11, 2),
 (12, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `newsletters`
+--
+
+CREATE TABLE IF NOT EXISTS `newsletters` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(150) DEFAULT NULL,
+  `description` text,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

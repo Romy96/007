@@ -39,6 +39,11 @@
 		</div>
 	</div>
 	<div>
+		<div class="checkbox">
+		  <label><input type="checkbox" name="newsletter" value="1">Ik wil me aanmelden voor de nieuwsbrief waarbij ik nieuws krijg via email.</label>
+		</div>
+	</div>
+	<div>
 		<input type="submit" value="Send">
 	</div>
 </form>

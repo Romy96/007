@@ -1,6 +1,6 @@
 <?php
 // create user function
-function createUser($firstname = null, $prefix = null, $lastname = null, $home_adress = null, $zip_code = null, $username = null, $password = null, $email = null)
+function createUser($firstname = null, $prefix = null, $lastname = null, $home_adress = null, $zip_code = null, $username = null, $password = null, $email = null, $newsletter = 0)
 {
 	// checking everthing for the post
 	$firstname = isset($_POST['firstname']) ? $_POST['firstname'] : null;
@@ -12,6 +12,7 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $home_a
 	$password = isset($_POST['password']) ? $_POST['password'] : null;
 	$hash = md5($password);
 	$email = isset($_POST['email']) ? $_POST['email'] : null;
+	$newsletter = isset($_POST['newsletter']) ? $_POST['newsletter'] : null;
 	
 	if (strlen($firstname) == 0 || strlen($lastname) == 0 || strlen($home_adress) == 0 || strlen($zip_code) == 0 || strlen($username) == 0 || strlen($password) == 0 || strlen($email) == 0) {
 		return false;
@@ -20,22 +21,45 @@ function createUser($firstname = null, $prefix = null, $lastname = null, $home_a
 	$db = openDatabaseConnection();
 
 	// insert into the database, in the table login
-	$sql = "INSERT INTO login(firstname, prefix, lastname, home_adress, zip_code, username, password, email) VALUES (:firstname, :prefix, :lastname, :home_adress, :zip_code,:username, :password, :email)";
-	$query = $db->prepare($sql);
-	$query->execute(array(
-		':firstname' => $firstname,
-		':prefix' => $prefix,
-		':lastname' => $lastname,
-		':home_adress' => $home_adress,
-		':zip_code' => $zip_code,
-		':username' => $username,
-		':password' => $hash,
-		':email' => $email
-	));
+	if(isset($_POST['newsletter']) && $_POST['newsletter'] == 1)
+	{
+		$sql = "INSERT INTO login(firstname, prefix, lastname, home_adress, zip_code, username, password, email, isSubcriber) VALUES (:firstname, :prefix, :lastname, :home_adress, :zip_code,:username, :password, :email, :newsletter)";
+		$query = $db->prepare($sql);
+		$query->execute(array(
+			':firstname' => $firstname,
+			':prefix' => $prefix,
+			':lastname' => $lastname,
+			':home_adress' => $home_adress,
+			':zip_code' => $zip_code,
+			':username' => $username,
+			':password' => $hash,
+			':email' => $email,
+			':newsletter' => $newsletter
+		));
 
-	$db = null;
-	
-	return true;
+		$db = null;
+		
+		return true;
+	}
+	elseif(empty($_POST['newsletter']))
+	{
+		$sql = "INSERT INTO login(firstname, prefix, lastname, home_adress, zip_code, username, password, email) VALUES (:firstname, :prefix, :lastname, :home_adress, :zip_code,:username, :password, :email)";
+		$query = $db->prepare($sql);
+		$query->execute(array(
+			':firstname' => $firstname,
+			':prefix' => $prefix,
+			':lastname' => $lastname,
+			':home_adress' => $home_adress,
+			':zip_code' => $zip_code,
+			':username' => $username,
+			':password' => $hash,
+			':email' => $email
+		));
+
+		$db = null;
+		
+		return true;
+	}
 }
 
 //fucntion for login users
