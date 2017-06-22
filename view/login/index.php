@@ -2,8 +2,6 @@
 if(isset($_SESSION['userId'])):
 ?>
 
-<h1>Welkom <?=$_SESSION['username']?>!</h1>
-
 <?php
 endif;
 ?>
@@ -11,7 +9,7 @@ endif;
 <div class="container">
         <div class="row">
         <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <h1 class="gallery-title">Gallery</h1>
+            <h1 class="gallery-title">Welkom <?=$_SESSION['username']?>!</h1>
         </div>
 
         <div align="center">
